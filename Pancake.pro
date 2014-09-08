@@ -7,7 +7,7 @@
 QT       -= core gui
 
 CONFIG(release, debug|release): TARGET = pancake
-CONFIG(debug, debug|release): TARGET = pancake-d
+CONFIG(debug, debug|release): TARGET = pancake-d DEFINES += PCKE_DEBUG
 TEMPLATE = lib
 
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -pedantic -Wno-unused-local-typedefs -Wno-unused-parameter -Wno-unused-variable
@@ -30,7 +30,8 @@ SOURCES += \
     source/OpenGL/Shader.cpp \
     source/OpenGL/ShaderProgram.cpp \
     source/Graphics/Image.cpp \
-    source/OpenGL/Texture.cpp
+    source/OpenGL/Texture.cpp \
+    source/OpenGL/GLCheck.cpp
 
 HEADERS += \
     include/Pancake/Graphics/Color.hpp \
@@ -43,4 +44,8 @@ HEADERS += \
     include/Pancake/Graphics/Image.hpp \
     include/Pancake/Graphics/stb/stb_image.h \
     include/Pancake/Graphics/stb/stb_image_write.h \
-    include/Pancake/OpenGL/Texture.hpp
+    include/Pancake/OpenGL/Texture.hpp \
+    include/Pancake/Graphics.hpp \
+    include/Pancake/OpenGL.hpp \
+    include/Pancake/Window.hpp \
+    source/OpenGL/GLCheck.hpp

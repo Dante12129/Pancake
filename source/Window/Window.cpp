@@ -5,6 +5,7 @@
 
 #include <SDL_opengl.h>
 #include "include/Pancake/Graphics/color.hpp"
+#include "source/OpenGL/GLCheck.hpp"
 
 namespace pcke
 {
@@ -44,7 +45,7 @@ namespace pcke
         {
             if(event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
             {
-                glViewport(0, 0, event.window.data1, event.window.data2);
+                glCheck(glViewport(0, 0, event.window.data1, event.window.data2));
             }
         }
         if(event.type == SDL_KEYDOWN)
@@ -57,8 +58,8 @@ namespace pcke
 
     void Window::clear(const Color& color)
     {
-        glClearColor(color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glCheck(glClearColor(color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f));
+        glCheck(glClear(GL_COLOR_BUFFER_BIT));
     }
     void Window::display()
     {

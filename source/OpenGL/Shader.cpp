@@ -5,12 +5,14 @@
 #include <memory>
 #include <sstream>
 
+#include "source/OpenGL/GLCheck.hpp"
+
 namespace pcke
 {
     Shader::~Shader()
     {
         if(created)
-            glDeleteShader(shader);
+            glCheck(glDeleteShader(shader));
     }
 
     bool Shader::loadFromFile(const std::string& filename, Type type)
@@ -39,21 +41,21 @@ namespace pcke
 
     bool Shader::create(const std::string& src, Type type)
     {
-        shader = glCreateShader(static_cast<GLenum>(type));
+        shader = glCheck(glCreateShader(static_cast<GLenum>(type)));
 
         auto c_src = src.c_str();
-        glShaderSource(shader, 1, &c_src, 0);
-        glCompileShader(shader);
+        glCheck(glShaderSource(shader, 1, &c_src, 0));
+        glCheck(glCompileShader(shader));
 
         GLint status;
-        glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+        glCheck(glGetShaderiv(shader, GL_COMPILE_STATUS, &status));
         if(status == GL_FALSE)
         {
             GLint log_length;
-            glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &log_length);
+            glCheck(glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &log_length));
 
             std::unique_ptr<GLchar[]> log(new GLchar[log_length + 1]);
-            glGetShaderInfoLog(shader, log_length, 0, log.get());
+            glCheck(glGetShaderInfoLog(shader, log_length, 0, log.get()));
 
             std::cerr << "Error compiling shader: " << log.get() << std::endl;
             return false;

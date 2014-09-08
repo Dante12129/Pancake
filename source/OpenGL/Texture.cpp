@@ -3,16 +3,17 @@
 #include <iostream>
 
 #include "include/Pancake/Graphics/Image.hpp"
+#include "source/OpenGL/GLCheck.hpp"
 
 namespace pcke
 {
     Texture::Texture()
     {
-        glGenTextures(1, &tex);
+        glCheck(glGenTextures(1, &tex));
     }
     Texture::~Texture()
     {
-        glDeleteTextures(1, &tex);
+        glCheck(glDeleteTextures(1, &tex));
     }
 
     bool Texture::loadFromFile(const std::string& file)
@@ -27,7 +28,7 @@ namespace pcke
         {
             size = img.getSize();
 
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, img.getPixels());
+            glCheck(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, img.getPixels()));
 
             created = true;
         }
@@ -42,14 +43,14 @@ namespace pcke
 
     void Texture::bind()
     {
-        glBindTexture(GL_TEXTURE_2D, tex);
+        glCheck(glBindTexture(GL_TEXTURE_2D, tex));
     }
     void Texture::unbind()
     {
-        glBindTexture(GL_TEXTURE_2D, 0);
+        glCheck(glBindTexture(GL_TEXTURE_2D, 0));
     }
     void Texture::setActiveUnit(GLenum unit)
     {
-        glActiveTexture(GL_TEXTURE0 + unit);
+        glCheck(glActiveTexture(GL_TEXTURE0 + unit));
     }
 }
