@@ -7,7 +7,8 @@
 QT       -= core gui
 
 CONFIG(release, debug|release): TARGET = pancake
-CONFIG(debug, debug|release): TARGET = pancake-d DEFINES += PCKE_DEBUG
+CONFIG(debug, debug|release): TARGET = pancake-d
+CONFIG(debug, debug | release): DEFINES += PCKE_DEBUG
 TEMPLATE = lib
 
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -pedantic -Wno-unused-local-typedefs -Wno-unused-parameter -Wno-unused-variable
