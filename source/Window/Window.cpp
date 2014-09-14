@@ -34,6 +34,7 @@ namespace pcke
 
     Window::~Window()
     {
+        //Destroy the context and window
         SDL_GL_DeleteContext(context);
         SDL_DestroyWindow(window);
     }

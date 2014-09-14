@@ -1,10 +1,11 @@
 #ifndef SHADERPROGRAM_HPP
 #define SHADERPROGRAM_HPP
 
+#include <utility>
 #include <string>
 
 #include <glload/gl_3_3.h>
-#include <glm/mat4x4.hpp>
+#include <glm/fwd.hpp>
 
 namespace pcke
 {
@@ -16,21 +17,38 @@ namespace pcke
             ShaderProgram();
             ~ShaderProgram();
 
+            //Extension-querying functions
+            bool binarySupported() const;
+
+            //Shader functions
             void addShader(Shader& shader);
             void removeShader(Shader& shader);
 
+            //Linking functions
             bool link();
 
+            //Activation functions
             void bind();
             void unbind();
 
+            //Uniform-setting functions
             void setUniform(const std::string& name, float value);
             void setUniform(const std::string& name, float first, float second);
             void setUniform(const std::string& name, float first, float second, float third);
             void setUniform(const std::string& name, float first, float second, float third, float fourth);
             void setUniform(const std::string& name, const glm::mat4& matrix);
 
+            //Binary Functions
+            int getBinarySize() const;
+            std::pair<GLenum*, void*> getBinary() const;
+            void setBinary(GLenum format, const void* binary, GLsizei length);
+
+            //Parameter-interaction functions
+            int getValue(GLenum param) const;
+            void setValue(GLenum param, int value);
+
         private:
+            bool linked = false;
             GLuint program;
     };
 }

@@ -1,5 +1,5 @@
-#ifndef WINDOW_HPP
-#define WINDOW_HPP
+#ifndef WINDOW_GROUP_HPP
+#define WINDOW_GROUP_HPP
 
 #include <Pancake/Window/Window.hpp>
 
