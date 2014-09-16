@@ -28,9 +28,9 @@ namespace pcke
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-                #ifdef PCKE_DEBUG
-                SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
-                #endif //PCKE_DEBUG
+                //#ifdef PCKE_DEBUG
+                //SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
+                //#endif //PCKE_DEBUG
 
                 //Create the context with the current flags
                 dummy_context = SDL_GL_CreateContext(dummy_window);
@@ -64,6 +64,12 @@ namespace pcke
         //Destroy the dummy window, as it's not needed
         SDL_GL_DeleteContext(dummy_context);
         SDL_DestroyWindow(dummy_window);
+
+        //Output confirmation
+        #ifdef PCKE_DEBUG
+        std::cout << "Pancake initialized successfully." << std::endl;
+        #endif //PCKE_DEBUG
+
     }
     Pancake::~Pancake()
     {

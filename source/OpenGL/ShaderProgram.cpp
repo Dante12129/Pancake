@@ -4,6 +4,7 @@
 #include <memory>
 
 #include <glm/gtc/type_ptr.hpp>
+#include <glload/gl_load.h>
 
 #include "include/Pancake/OpenGL/Shader.hpp"
 #include "source/OpenGL/GLCheck.hpp"
@@ -19,7 +20,7 @@ namespace pcke
 
     bool ShaderProgram::binarySupported() const
     {
-        return glext_ARB_get_program_binary;
+        return ogl_IsVersionGEQ(4, 1) || glext_ARB_get_program_binary;
     }
 
     void ShaderProgram::addShader(Shader& shader)
@@ -97,18 +98,22 @@ namespace pcke
         else
             return 0;
     }
-    std::pair<GLenum*, void*> ShaderProgram::getBinary() const
+    std::pair<GLenum*, VoidPointer> ShaderProgram::getBinary() const
     {
         if(binarySupported())
         {
             GLenum* format;
-            void* binary;
+            VoidPointer binary(getBinarySize());
 
-            glCheck(glGetProgramBinary(program, getBinarySize(), nullptr, format, binary));
-            return std::make_pair(format, binary);
+            if(binary.getSize() == 0)
+                throw std::runtime_error("Binary size is wrong.");
+
+            glCheck(glGetProgramBinary(program, binary.getSize(), nullptr, format, binary.get()));
+
+            return std::make_pair(format, std::move(binary));
         }
         else
-            return std::make_pair(nullptr, nullptr);
+            return std::make_pair(nullptr, VoidPointer());
     }
     void ShaderProgram::setBinary(GLenum format, const void* binary, GLsizei length)
     {

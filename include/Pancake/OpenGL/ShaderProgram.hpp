@@ -1,11 +1,14 @@
 #ifndef SHADERPROGRAM_HPP
 #define SHADERPROGRAM_HPP
 
-#include <utility>
+#include <memory>
 #include <string>
 
-#include <glload/gl_3_3.h>
+#define GLM_FORCE_RADIANS
 #include <glm/fwd.hpp>
+#include <glload/gl_3_3.h>
+
+#include "Pancake/Utility/VoidPointer.hpp"
 
 namespace pcke
 {
@@ -40,7 +43,7 @@ namespace pcke
 
             //Binary Functions
             int getBinarySize() const;
-            std::pair<GLenum*, void*> getBinary() const;
+            std::pair<GLenum*, VoidPointer> getBinary() const;
             void setBinary(GLenum format, const void* binary, GLsizei length);
 
             //Parameter-interaction functions
