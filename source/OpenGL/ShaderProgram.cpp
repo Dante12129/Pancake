@@ -65,6 +65,11 @@ namespace pcke
         glCheck(glUseProgram(0));
     }
 
+    GLuint ShaderProgram::getHandle() const
+    {
+        return program;
+    }
+
     void ShaderProgram::setUniform(const std::string& name, float value)
     {
         bind();
@@ -98,22 +103,18 @@ namespace pcke
         else
             return 0;
     }
-    std::pair<GLenum*, VoidPointer> ShaderProgram::getBinary() const
+    std::pair<GLenum, std::unique_ptr<char[]>> ShaderProgram::getBinary() const
     {
         if(binarySupported())
         {
-            GLenum* format;
-            VoidPointer binary(getBinarySize());
+            std::unique_ptr<char[]> binary(new char[getBinarySize()]);
 
-            if(binary.getSize() == 0)
-                throw std::runtime_error("Binary size is wrong.");
-
-            glCheck(glGetProgramBinary(program, binary.getSize(), nullptr, format, binary.get()));
+            glCheck(glGetProgramBinary(program, getBinarySize(), nullptr, &format, void_cast(binary)));
 
             return std::make_pair(format, std::move(binary));
         }
         else
-            return std::make_pair(nullptr, VoidPointer());
+            return std::make_pair(0, nullptr);
     }
     void ShaderProgram::setBinary(GLenum format, const void* binary, GLsizei length)
     {
@@ -131,4 +132,11 @@ namespace pcke
     {
         glCheck(glProgramParameteri(program, param, value));
     }
+
+
+    void* void_cast(std::unique_ptr<char[]>& data)
+    {
+        return static_cast<void*>(data.get());
+    }
 }
+

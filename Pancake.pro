@@ -33,8 +33,7 @@ SOURCES += \
     source/OpenGL/ShaderProgram.cpp \
     source/Graphics/Image.cpp \
     source/OpenGL/Texture.cpp \
-    source/OpenGL/GLCheck.cpp \
-    source/Utility/VoidPointer.cpp
+    source/OpenGL/GLCheck.cpp
 
 HEADERS += \
     include/Pancake/Graphics/Color.hpp \
@@ -51,5 +50,4 @@ HEADERS += \
     include/Pancake/Graphics.hpp \
     include/Pancake/OpenGL.hpp \
     include/Pancake/Window.hpp \
-    source/OpenGL/GLCheck.hpp \
-    include/Pancake/Utility/VoidPointer.hpp
+    source/OpenGL/GLCheck.hpp

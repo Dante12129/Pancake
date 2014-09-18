@@ -8,8 +8,6 @@
 #include <glm/fwd.hpp>
 #include <glload/gl_3_3.h>
 
-#include "Pancake/Utility/VoidPointer.hpp"
-
 namespace pcke
 {
     class Shader;
@@ -34,6 +32,9 @@ namespace pcke
             void bind();
             void unbind();
 
+            //Get a handle to the OpenGL program
+            GLuint getHandle() const;
+
             //Uniform-setting functions
             void setUniform(const std::string& name, float value);
             void setUniform(const std::string& name, float first, float second);
@@ -43,7 +44,7 @@ namespace pcke
 
             //Binary Functions
             int getBinarySize() const;
-            std::pair<GLenum*, VoidPointer> getBinary() const;
+            std::pair<GLenum, std::unique_ptr<char[]>> getBinary() const;
             void setBinary(GLenum format, const void* binary, GLsizei length);
 
             //Parameter-interaction functions
@@ -53,7 +54,12 @@ namespace pcke
         private:
             bool linked = false;
             GLuint program;
+
+            mutable GLenum format = 0;
     };
+
+    //Cast unique_ptr to void*
+    void* void_cast(std::unique_ptr<char[]>& data);
 }
 
 #endif // SHADERPROGRAM_HPP
