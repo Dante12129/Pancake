@@ -107,6 +107,7 @@ namespace pcke
     {
         if(binarySupported())
         {
+            GLenum format = 0;
             std::unique_ptr<char[]> binary(new char[getBinarySize()]);
 
             glCheck(glGetProgramBinary(program, getBinarySize(), nullptr, &format, void_cast(binary)));

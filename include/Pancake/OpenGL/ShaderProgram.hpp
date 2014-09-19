@@ -54,8 +54,6 @@ namespace pcke
         private:
             bool linked = false;
             GLuint program;
-
-            mutable GLenum format = 0;
     };
 
     //Cast unique_ptr to void*
