@@ -9,7 +9,6 @@ QT       -= core gui
 CONFIG(release, debug|release): TARGET = pancake
 CONFIG(debug, debug|release): TARGET = pancake-d
 CONFIG(debug, debug|release): DEFINES += PCKE_DEBUG
-CONFIG(debug, debug|release): QMAKE_CXXFLAGS += -g -O0
 TEMPLATE = lib
 
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -pedantic -Wno-unused-local-typedefs -Wno-unused-parameter -Wno-unused-variable
@@ -26,21 +25,20 @@ DEPENDPATH += include C:/SDL/include C:/GL/glm C:/GL/SDK/include
 SOURCES += \
     source/Graphics/Color.cpp \
     source/Graphics/Vertex.cpp \
-    source/OpenGL/Vbo.cpp \
     source/Window/Window.cpp \
     source/Pancake.cpp \
     source/OpenGL/Shader.cpp \
     source/OpenGL/ShaderProgram.cpp \
     source/Graphics/Image.cpp \
     source/OpenGL/Texture.cpp \
-    source/OpenGL/GLCheck.cpp
+    source/OpenGL/GLCheck.cpp \
+    source/OpenGL/BufferObject.cpp
 
 HEADERS += \
     include/Pancake/Graphics/Color.hpp \
     include/Pancake/Graphics/Vertex.hpp \
     include/Pancake/OpenGL/Shader.hpp \
     include/Pancake/OpenGL/ShaderProgram.hpp \
-    include/Pancake/OpenGL/Vbo.hpp \
     include/Pancake/Window/Window.hpp \
     include/Pancake/Pancake.hpp \
     include/Pancake/Graphics/Image.hpp \
@@ -50,4 +48,5 @@ HEADERS += \
     include/Pancake/Graphics.hpp \
     include/Pancake/OpenGL.hpp \
     include/Pancake/Window.hpp \
-    source/OpenGL/GLCheck.hpp
+    source/OpenGL/GLCheck.hpp \
+    include/Pancake/OpenGL/BufferObject.hpp
