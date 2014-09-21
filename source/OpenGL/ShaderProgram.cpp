@@ -22,6 +22,18 @@ namespace pcke
     {
         return ogl_IsVersionGEQ(4, 1) || glext_ARB_get_program_binary;
     }
+    bool ShaderProgram::interfaceSupported() const
+    {
+        return ogl_IsVersionGEQ(4, 3) || glext_ARB_program_interface_query;
+    }
+    bool ShaderProgram::separationSupported() const
+    {
+        return ogl_IsVersionGEQ(4, 1) || glext_ARB_separate_shader_objects;
+    }
+    bool ShaderProgram::glsl420Supported() const
+    {
+        return ogl_IsVersionGEQ(4, 2) || glext_ARB_shading_language_420pack;
+    }
 
     void ShaderProgram::addShader(Shader& shader)
     {
