@@ -28,8 +28,12 @@ namespace pcke
         {
             size = img.getSize();
 
+            bind();
+            glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0));
+            glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0));
             glCheck(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, img.getPixels()));
 
+            unbind();
             created = true;
         }
         else
