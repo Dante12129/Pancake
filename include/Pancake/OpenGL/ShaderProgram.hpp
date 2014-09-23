@@ -35,8 +35,9 @@ namespace pcke
             void bind();
             void unbind();
 
-            //Get a handle to the OpenGL program
+            //Important getters
             GLuint getHandle() const;
+            static GLuint getBound();
 
             //Uniform-setting functions
             void setUniform(const std::string& name, float value);

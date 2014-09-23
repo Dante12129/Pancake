@@ -81,6 +81,12 @@ namespace pcke
     {
         return program;
     }
+    GLuint ShaderProgram::getBound()
+    {
+        int value;
+        glCheck(glGetIntegerv(GL_CURRENT_PROGRAM, &value));
+        return value;
+    }
 
     void ShaderProgram::setUniform(const std::string& name, float value)
     {
