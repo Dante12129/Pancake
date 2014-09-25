@@ -7,6 +7,7 @@
 #include <glload/gl_load.h>
 
 #include "include/Pancake/OpenGL/Shader.hpp"
+#include "include/Pancake/OpenGL/Texture.hpp"
 #include "source/OpenGL/GLCheck.hpp"
 
 namespace pcke
@@ -112,6 +113,11 @@ namespace pcke
     {
         bind();
         glCheck(glUniformMatrix4fv(glGetUniformLocation(program, name.c_str()), 1, GL_FALSE, glm::value_ptr(matrix)));
+    }
+    void ShaderProgram::setUniform(const std::string& name, const Texture& tex)
+    {
+        bind();
+        glCheck(glUniform1i(glGetUniformLocation(program, name.c_str()), 0));
     }
 
     int ShaderProgram::getBinarySize() const

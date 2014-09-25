@@ -13,6 +13,9 @@ namespace pcke
     class Texture
     {
         public:
+            friend class ShaderProgram;
+
+        public:
             Texture();
             ~Texture();
 
