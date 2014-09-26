@@ -1,6 +1,7 @@
 #ifndef SHADERPROGRAM_HPP
 #define SHADERPROGRAM_HPP
 
+#include <map>
 #include <memory>
 #include <string>
 
@@ -46,7 +47,7 @@ namespace pcke
             void setUniform(const std::string& name, float first, float second, float third);
             void setUniform(const std::string& name, float first, float second, float third, float fourth);
             void setUniform(const std::string& name, const glm::mat4& matrix);
-            void setUniform(const std::string& name, const Texture& tex);
+            void setUniform(const std::string& name, Texture& tex);
 
             //Binary Functions
             int getBinarySize() const;
@@ -60,6 +61,10 @@ namespace pcke
         private:
             bool linked = false;
             GLuint program;
+
+            //Uniform caching
+            std::map<std::string, GLuint> uniform_locations;
+            GLuint uniformLocation(const std::string& name);
     };
 
     //Cast unique_ptr to void*

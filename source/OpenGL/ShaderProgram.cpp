@@ -47,6 +47,8 @@ namespace pcke
 
     bool ShaderProgram::link()
     {
+        uniform_locations.clear();
+
         if(binarySupported())
             setValue(GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE);
         glCheck(glLinkProgram(program));
@@ -92,32 +94,33 @@ namespace pcke
     void ShaderProgram::setUniform(const std::string& name, float value)
     {
         bind();
-        glCheck(glUniform1f(glGetUniformLocation(program, name.c_str()), value));
+        glCheck(glUniform1f(uniformLocation(name), value));
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second)
     {
         bind();
-        glCheck(glUniform2f(glGetUniformLocation(program, name.c_str()), first, second));
+        glCheck(glUniform2f(uniformLocation(name), first, second));
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second, float third)
     {
         bind();
-        glCheck(glUniform3f(glGetUniformLocation(program, name.c_str()), first, second, third));
+        glCheck(glUniform3f(uniformLocation(name), first, second, third));
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second, float third, float fourth)
     {
         bind();
-        glCheck(glUniform4f(glGetUniformLocation(program, name.c_str()), first, second, third, fourth));
+        glCheck(glUniform4f(uniformLocation(name), first, second, third, fourth));
     }
     void ShaderProgram::setUniform(const std::string& name, const glm::mat4& matrix)
     {
         bind();
-        glCheck(glUniformMatrix4fv(glGetUniformLocation(program, name.c_str()), 1, GL_FALSE, glm::value_ptr(matrix)));
+        glCheck(glUniformMatrix4fv(uniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
     }
-    void ShaderProgram::setUniform(const std::string& name, const Texture& tex)
+    void ShaderProgram::setUniform(const std::string& name, Texture& tex)
     {
         bind();
-        glCheck(glUniform1i(glGetUniformLocation(program, name.c_str()), 0));
+        tex.bind();
+        glCheck(glUniform1i(uniformLocation(name), 0));
     }
 
     int ShaderProgram::getBinarySize() const
@@ -158,7 +161,27 @@ namespace pcke
         glCheck(glProgramParameteri(program, param, value));
     }
 
+    //Private methods
+    GLuint ShaderProgram::uniformLocation(const std::string& name)
+    {
+        GLuint location = -2;
 
+        //Try to find cached location
+        auto loc_it = uniform_locations.find(name);
+
+        //If the location wasn't found, insert it
+        if(loc_it == uniform_locations.cend())
+        {
+            location = glCheck(glGetUniformLocation(program, name.c_str()));
+            uniform_locations.insert(std::make_pair(name, location));
+        }
+        else
+            location = loc_it->second;
+
+        return location;
+    }
+
+    //Free functions
     void* void_cast(std::unique_ptr<char[]>& data)
     {
         return static_cast<void*>(data.get());
