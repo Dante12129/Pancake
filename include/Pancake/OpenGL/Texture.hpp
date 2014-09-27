@@ -22,8 +22,8 @@ namespace pcke
             bool loadFromFile(const std::string& file);
             bool loadFromImage(const Image& img);
 
-            void bind();
-            void unbind();
+            void bind() const;
+            void unbind() const;
             static void setActiveUnit(GLenum unit);
 
         private:

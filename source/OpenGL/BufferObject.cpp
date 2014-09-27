@@ -26,11 +26,11 @@ namespace pcke
         unbind();
     }
 
-    void BufferObject::bind()
+    void BufferObject::bind() const
     {
         glCheck(glBindBuffer(type, buffer));
     }
-    void BufferObject::unbind()
+    void BufferObject::unbind() const
     {
         glCheck(glBindBuffer(type, 0));
     }

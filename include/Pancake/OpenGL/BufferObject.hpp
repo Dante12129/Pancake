@@ -23,8 +23,8 @@ namespace pcke
             void setData(GLsizeiptr size, void* data, GLenum usage);
             void updateData(GLintptr offset, GLsizeiptr size, void* data);
 
-            void bind();
-            void unbind();
+            void bind() const;
+            void unbind() const;
 
         private:
             GLuint buffer;

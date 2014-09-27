@@ -71,11 +71,11 @@ namespace pcke
         return linked;
     }
 
-    void ShaderProgram::bind()
+    void ShaderProgram::bind() const
     {
         glCheck(glUseProgram(program));
     }
-    void ShaderProgram::unbind()
+    void ShaderProgram::unbind() const
     {
         glCheck(glUseProgram(0));
     }
@@ -116,7 +116,7 @@ namespace pcke
         bind();
         glCheck(glUniformMatrix4fv(uniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
     }
-    void ShaderProgram::setUniform(const std::string& name, Texture& tex)
+    void ShaderProgram::setUniform(const std::string& name, const Texture& tex)
     {
         bind();
         tex.bind();

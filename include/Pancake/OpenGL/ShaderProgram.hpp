@@ -34,8 +34,8 @@ namespace pcke
             bool link();
 
             //Activation functions
-            void bind();
-            void unbind();
+            void bind() const;
+            void unbind() const;
 
             //Important getters
             GLuint getHandle() const;
@@ -47,7 +47,7 @@ namespace pcke
             void setUniform(const std::string& name, float first, float second, float third);
             void setUniform(const std::string& name, float first, float second, float third, float fourth);
             void setUniform(const std::string& name, const glm::mat4& matrix);
-            void setUniform(const std::string& name, Texture& tex);
+            void setUniform(const std::string& name, const Texture& tex);
 
             //Binary Functions
             int getBinarySize() const;

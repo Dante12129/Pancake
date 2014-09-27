@@ -45,11 +45,11 @@ namespace pcke
         return created;
     }
 
-    void Texture::bind()
+    void Texture::bind() const
     {
         glCheck(glBindTexture(GL_TEXTURE_2D, tex));
     }
-    void Texture::unbind()
+    void Texture::unbind() const
     {
         glCheck(glBindTexture(GL_TEXTURE_2D, 0));
     }
