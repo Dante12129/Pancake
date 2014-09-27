@@ -88,6 +88,7 @@ namespace pcke
     {
         int value;
         glCheck(glGetIntegerv(GL_CURRENT_PROGRAM, &value));
+
         return value;
     }
 
@@ -154,6 +155,7 @@ namespace pcke
     {
         int value;
         glCheck(glGetProgramiv(program, param, &value));
+
         return value;
     }
     void ShaderProgram::setValue(GLenum param, int value)

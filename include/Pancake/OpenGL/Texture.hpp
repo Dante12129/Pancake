@@ -26,6 +26,9 @@ namespace pcke
             void unbind() const;
             static void setActiveUnit(GLenum unit);
 
+            static GLuint getActiveUnit();
+            static GLuint getActive();
+
         private:
             bool created = false;
             GLuint tex;

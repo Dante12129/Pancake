@@ -57,4 +57,19 @@ namespace pcke
     {
         glCheck(glActiveTexture(GL_TEXTURE0 + unit));
     }
+
+    GLuint Texture::getActiveUnit()
+    {
+        int object;
+        glCheck(glGetIntegerv(GL_ACTIVE_TEXTURE, &object));
+
+        return object;
+    }
+    GLuint Texture::getActive()
+    {
+        int object;
+        glCheck(glGetIntegerv(GL_TEXTURE_BINDING_2D, & object));
+
+        return object;
+    }
 }
