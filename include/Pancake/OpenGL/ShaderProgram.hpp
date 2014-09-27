@@ -47,7 +47,7 @@ namespace pcke
             void setUniform(const std::string& name, float first, float second, float third);
             void setUniform(const std::string& name, float first, float second, float third, float fourth);
             void setUniform(const std::string& name, const glm::mat4& matrix);
-            void setUniform(const std::string& name, const Texture& tex);
+            void setUniform(const std::string& name, const Texture& tex, GLint unit = 0);
 
             //Binary Functions
             int getBinarySize() const;

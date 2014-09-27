@@ -117,11 +117,11 @@ namespace pcke
         bind();
         glCheck(glUniformMatrix4fv(uniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
     }
-    void ShaderProgram::setUniform(const std::string& name, const Texture& tex)
+    void ShaderProgram::setUniform(const std::string& name, const Texture& tex, GLint unit)
     {
         bind();
         tex.bind();
-        glCheck(glUniform1i(uniformLocation(name), 0));
+        glCheck(glUniform1i(uniformLocation(name), unit));
     }
 
     int ShaderProgram::getBinarySize() const
