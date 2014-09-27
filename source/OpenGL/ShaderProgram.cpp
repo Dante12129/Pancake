@@ -119,8 +119,10 @@ namespace pcke
     }
     void ShaderProgram::setUniform(const std::string& name, const Texture& tex, GLint unit)
     {
-        bind();
+        Texture::setActiveUnit(GL_TEXTURE0 + unit);
         tex.bind();
+
+        bind();
         glCheck(glUniform1i(uniformLocation(name), unit));
     }
 
