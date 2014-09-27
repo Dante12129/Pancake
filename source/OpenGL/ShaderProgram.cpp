@@ -94,36 +94,126 @@ namespace pcke
 
     void ShaderProgram::setUniform(const std::string& name, float value)
     {
-        bind();
-        glCheck(glUniform1f(uniformLocation(name), value));
+        if(!separationSupported()) //If we can't do uniforms without binding
+        {
+            //Get the currently-bound program and bind this program
+            auto previous = getBound();
+            bind();
+
+            //Set the uniform
+            glCheck(glUniform1f(uniformLocation(name), value));
+
+            //Set the previous program back
+            glCheck(glUseProgram(previous));
+        }
+        else //If we can do uniforms without binding
+        {
+            //Set the uniform with this program
+            glCheck(glProgramUniform1f(program, uniformLocation(name), value));
+        }
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second)
     {
-        bind();
-        glCheck(glUniform2f(uniformLocation(name), first, second));
+        if(!separationSupported()) //If we can't do uniforms without binding
+        {
+            //Get the currently-bound program and bind this program
+            auto previous = getBound();
+            bind();
+
+            //Set the uniform
+            glCheck(glUniform2f(uniformLocation(name), first, second));
+
+            //Set the previous program back
+            glCheck(glUseProgram(previous));
+        }
+        else //If we can do uniforms without binding
+        {
+            //Set the uniform with this program
+            glCheck(glProgramUniform2f(program, uniformLocation(name), first, second));
+        }
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second, float third)
     {
-        bind();
-        glCheck(glUniform3f(uniformLocation(name), first, second, third));
+        if(!separationSupported()) //If we can't do uniforms without binding
+        {
+            //Get the currently-bound program and bind this program
+            auto previous = getBound();
+            bind();
+
+            //Set the uniform
+            glCheck(glUniform3f(uniformLocation(name), first, second, third));
+
+            //Set the previous program back
+            glCheck(glUseProgram(previous));
+        }
+        else //If we can do uniforms without binding
+        {
+            //Set the uniform with this program
+            glCheck(glProgramUniform3f(program, uniformLocation(name), first, second, third));
+        }
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second, float third, float fourth)
     {
-        bind();
-        glCheck(glUniform4f(uniformLocation(name), first, second, third, fourth));
+        if(!separationSupported()) //If we can't do uniforms without binding
+        {
+            //Get the currently-bound program and bind this program
+            auto previous = getBound();
+            bind();
+
+            //Set the uniform
+            glCheck(glUniform4f(uniformLocation(name), first, second, third, fourth));
+
+            //Set the previous program back
+            glCheck(glUseProgram(previous));
+        }
+        else //If we can do uniforms without binding
+        {
+            //Set the uniform with this program
+            glCheck(glProgramUniform4f(program, uniformLocation(name), first, second, third, fourth));
+        }
     }
     void ShaderProgram::setUniform(const std::string& name, const glm::mat4& matrix)
     {
-        bind();
-        glCheck(glUniformMatrix4fv(uniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
+        if(!separationSupported()) //If we can't do uniforms without binding
+        {
+            //Get the currently-bound program and bind this program
+            auto previous = getBound();
+            bind();
+
+            //Set the uniform
+            glCheck(glUniformMatrix4fv(uniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
+
+            //Set the previous program back
+            glCheck(glUseProgram(previous));
+        }
+        else //If we can do uniforms without binding
+        {
+            //Set the uniform with this program
+            glCheck(glProgramUniformMatrix4fv(program, uniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
+        }
     }
     void ShaderProgram::setUniform(const std::string& name, const Texture& tex, GLint unit)
     {
         Texture::setActiveUnit(GL_TEXTURE0 + unit);
         tex.bind();
 
-        bind();
-        glCheck(glUniform1i(uniformLocation(name), unit));
+        if(!separationSupported()) //If we can't do uniforms without binding
+        {
+            //Get the currently-bound program and bind this program
+            auto previous = getBound();
+            bind();
+
+            //Set the uniform
+            glCheck(glUniform1i(uniformLocation(name), unit));
+
+            //Set the previous program back
+            glCheck(glUseProgram(previous));
+        }
+        else //If we can do uniforms without binding
+        {
+            //Set the uniform with this program
+            glCheck(glProgramUniform1i(program, uniformLocation(name), unit));
+        }
     }
 
     int ShaderProgram::getBinarySize() const
