@@ -28,6 +28,7 @@ namespace pcke
 
             static GLuint getActiveUnit();
             static GLuint getActive();
+            static int getMaxSize();
 
         private:
             bool created = false;

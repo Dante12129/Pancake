@@ -72,4 +72,11 @@ namespace pcke
 
         return object;
     }
+    int Texture::getMaxSize()
+    {
+        int size = 0;
+        glCheck(glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size));
+
+        return size;
+    }
 }
