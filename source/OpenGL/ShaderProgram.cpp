@@ -79,6 +79,37 @@ namespace pcke
     {
         glCheck(glUseProgram(0));
     }
+    void ShaderProgram::bindTextures() const
+    {
+        for(const auto& i : textures)
+        {
+            //Activate the appropriate texture unit and texture
+            Texture::setActiveUnit(i.first);
+            i.second.second->bind();
+
+            if(!separationSupported()) //If we can't do uniforms without binding
+            {
+                //Get the currently-bound program and bind this program
+                auto previous = getBound();
+                bind();
+
+                //Set the uniform
+                glCheck(glUniform1i(i.second.first, i.first));
+
+                //Set the previous values back
+                glCheck(glUseProgram(previous));
+
+            }
+            else //If we can do uniforms without binding
+            {
+                //Set the uniform with this program
+                glCheck(glProgramUniform1i(program, i.second.first, i.first));
+            }
+        }
+
+        //Reset the active texture unit to 0
+        Texture::setActiveUnit(0);
+    }
 
     GLuint ShaderProgram::getHandle() const
     {
@@ -192,28 +223,10 @@ namespace pcke
             glCheck(glProgramUniformMatrix4fv(program, uniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
         }
     }
-    void ShaderProgram::setUniform(const std::string& name, const Texture& tex, GLint unit)
+    void ShaderProgram::setUniform(const std::string& name, Texture& tex, GLuint unit)
     {
-        Texture::setActiveUnit(GL_TEXTURE0 + unit);
-        tex.bind();
-
-        if(!separationSupported()) //If we can't do uniforms without binding
-        {
-            //Get the currently-bound program and bind this program
-            auto previous = getBound();
-            bind();
-
-            //Set the uniform
-            glCheck(glUniform1i(uniformLocation(name), unit));
-
-            //Set the previous program back
-            glCheck(glUseProgram(previous));
-        }
-        else //If we can do uniforms without binding
-        {
-            //Set the uniform with this program
-            glCheck(glProgramUniform1i(program, uniformLocation(name), unit));
-        }
+        //Save the texture unit and the texture we want to associate with it
+        textures.insert(std::make_pair(unit, std::make_pair(uniformLocation(name), &tex)));
     }
 
     int ShaderProgram::getBinarySize() const
