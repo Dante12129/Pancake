@@ -223,10 +223,21 @@ namespace pcke
             glCheck(glProgramUniformMatrix4fv(program, uniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
         }
     }
-    void ShaderProgram::setUniform(const std::string& name, Texture& tex, GLuint unit)
+    void ShaderProgram::setUniform(const std::string& name, const Texture& tex, GLuint unit)
     {
-        //Save the texture unit and the texture we want to associate with it
-        textures.insert(std::make_pair(unit, std::make_pair(uniformLocation(name), &tex)));
+        //Try to find the cached info
+        auto it = textures.find(unit);
+
+        if(it != textures.end()) //If the unit was found
+        {
+            //Replace the texture and uniform location
+            it->second = std::make_pair(uniformLocation(name), &tex);
+        }
+        else //If the unit was not found
+        {
+            //Save the texture unit and the texture we want to associate with it
+            textures.insert(std::make_pair(unit, std::make_pair(uniformLocation(name), &tex)));
+        }
     }
 
     int ShaderProgram::getBinarySize() const

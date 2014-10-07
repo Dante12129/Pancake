@@ -48,7 +48,7 @@ namespace pcke
             void setUniform(const std::string& name, float first, float second, float third);
             void setUniform(const std::string& name, float first, float second, float third, float fourth);
             void setUniform(const std::string& name, const glm::mat4& matrix);
-            void setUniform(const std::string& name, Texture& tex, GLuint unit = 0);
+            void setUniform(const std::string& name, const Texture& tex, GLuint unit = 0);
 
             //Binary Functions
             int getBinarySize() const;
@@ -68,7 +68,7 @@ namespace pcke
             GLuint uniformLocation(const std::string& name);
 
             //Texture caching
-            std::map<GLuint, std::pair<GLuint, Texture*>> textures;
+            std::map<GLuint, std::pair<GLuint, const Texture*>> textures;
     };
 
     //Cast unique_ptr to void*
