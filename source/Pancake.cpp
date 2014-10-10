@@ -1,9 +1,9 @@
 #include "include/Pancake/Pancake.hpp"
 
 #include <iostream>
-#include <stdexcept>
 
 #include <SDL.h>
+#include <SDL_video.h>
 
 #include <glload/gl_load.h>
 
@@ -24,7 +24,7 @@ namespace pcke
         {
             for(int minor = 5; minor > 0; --minor)
             {
-
+                //Set the context settings
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -47,7 +47,6 @@ namespace pcke
         if(!dummy_context)
         {
             std::cerr << "Error creating OpenGL context: " << SDL_GetError() << std::endl;
-            throw std::runtime_error("Error in Pancake constructor.");
         }
 
         //Initialize OpenGL
@@ -58,19 +57,47 @@ namespace pcke
         if(!ogl_IsVersionGEQ(3, 3))
         {
             std::cerr << "OpenGL is not at least version 3.3" << std::endl;
-            throw std::runtime_error("OpenGL is not at least version 3.3");
         }
 
         //Destroy the dummy window, as it's not needed
         SDL_GL_DeleteContext(dummy_context);
         SDL_DestroyWindow(dummy_window);
+    }
+    Pancake::Pancake(int major, int minor)
+    {
+        //Initialize SDL
+        if(SDL_Init(SDL_INIT_VIDEO))
+            std::cerr << "SDL couldn't be initialized." << std::endl;
 
-        //Output confirmation
+        //Create dummy window for OpenGL
+        auto dummy_window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN);
+
+        //Set the context settings
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
         #ifdef PCKE_DEBUG
-        std::cout << "Pancake initialized successfully." << std::endl;
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
         #endif //PCKE_DEBUG
 
+        //Create the context
+        auto dummy_context = SDL_GL_CreateContext(dummy_window);
+
+        //Check for errors
+        if(!dummy_context)
+        {
+            std::cerr << "Error creating OpenGL context: " << SDL_GetError() << std::endl;
+        }
+
+        //Initialize OpenGL
+        if(ogl_LoadFunctions() == ogl_LOAD_FAILED)
+            std::cerr << "OpenGL functions unable to be loaded." << std::endl;
+
+        //Destroy the dummy window, as it's not needed
+        SDL_GL_DeleteContext(dummy_context);
+        SDL_DestroyWindow(dummy_window);
     }
+
     Pancake::~Pancake()
     {
         //Shutdown SDL

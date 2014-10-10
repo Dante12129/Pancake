@@ -7,6 +7,7 @@ namespace pcke
     {
         public:
             Pancake();
+            Pancake(int major, int minor);
             Pancake(const Pancake& other) = delete;
             Pancake(Pancake&&) = delete;
             ~Pancake();
