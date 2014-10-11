@@ -32,7 +32,8 @@ SOURCES += \
     source/Graphics/Image.cpp \
     source/OpenGL/Texture.cpp \
     source/OpenGL/GLCheck.cpp \
-    source/OpenGL/BufferObject.cpp
+    source/OpenGL/BufferObject.cpp \
+    source/Window/Context.cpp
 
 HEADERS += \
     include/Pancake/Graphics/Color.hpp \
@@ -49,4 +50,5 @@ HEADERS += \
     include/Pancake/OpenGL.hpp \
     include/Pancake/Window.hpp \
     source/OpenGL/GLCheck.hpp \
-    include/Pancake/OpenGL/BufferObject.hpp
+    include/Pancake/OpenGL/BufferObject.hpp \
+    include/Pancake/Window/Context.hpp
