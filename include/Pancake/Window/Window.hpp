@@ -15,6 +15,10 @@ namespace pcke
     class Window
     {
         public:
+            friend class Context;
+
+        public:
+
             Window(const std::string& title, int width, int height);
             ~Window();
 

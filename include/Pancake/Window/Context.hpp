@@ -5,11 +5,14 @@
 
 namespace pcke
 {
+    class Window;
+
     class Context
     {
         public:
             ~Context();
 
+            bool create(const Window& window, int major, int minor);
             void setActive(bool active, SDL_Window* window);
 
         private:
