@@ -13,7 +13,7 @@ namespace pcke
             ~Context();
 
             bool create(const Window& window, int major, int minor);
-            void setActive(bool active, SDL_Window* window);
+            bool setActive(bool active, SDL_Window* window);
 
         private:
             SDL_GLContext context;
