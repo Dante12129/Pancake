@@ -55,4 +55,9 @@ namespace pcke
 
         return result;
     }
+
+    Context::operator bool() const
+    {
+        return context;
+    }
 }
