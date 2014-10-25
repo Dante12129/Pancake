@@ -13,7 +13,7 @@ namespace pcke
             ~Context();
 
             bool create(const Window& window, int major, int minor);
-            bool setActive(bool active, SDL_Window* window);
+            bool setActive(const Window& window, bool active);
 
             explicit operator bool() const;
 

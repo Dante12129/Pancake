@@ -41,14 +41,14 @@ namespace pcke
 
         return created;
     }
-    bool Context::setActive(bool active, SDL_Window* window)
+    bool Context::setActive(const Window& window, bool active)
     {
         bool result;
 
         if(active)
-            result = SDL_GL_MakeCurrent(window, context);
+            result = SDL_GL_MakeCurrent(window.window, context);
         else
-            result = SDL_GL_MakeCurrent(window, nullptr);
+            result = SDL_GL_MakeCurrent(window.window, nullptr);
 
         if(!result)
             std::cerr << "Error setting active context: " << SDL_GetError() << std::endl;
