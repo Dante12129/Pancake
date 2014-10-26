@@ -31,7 +31,19 @@ namespace pcke
             throw std::runtime_error(error.str());
         }
     }
+    Window::Window(SDL_Window* win) : window(nullptr)
+    {
+        //Take ownership of the window
+        window = win;
 
+        //Create GL Context
+        context = SDL_GL_CreateContext(window);
+        if(context == nullptr)
+        {
+            error << "Context creation error: " << SDL_GetError();
+            throw std::runtime_error(error.str());
+        }
+    }
     Window::~Window()
     {
         //Destroy the context and window

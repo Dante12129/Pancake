@@ -20,6 +20,7 @@ namespace pcke
         public:
 
             Window(const std::string& title, int width, int height);
+            Window(SDL_Window* win);
             ~Window();
 
             bool pollEvent(SDL_Event& event);

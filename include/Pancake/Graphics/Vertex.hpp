@@ -3,7 +3,7 @@
 
 #include <glm/vec4.hpp>
 
-#include "Pancake/Graphics/Color.hpp"
+#include <Pancake/Graphics/Color.hpp>
 
 namespace pcke
 {
