@@ -12,7 +12,7 @@ namespace pcke
             SDL_GL_DeleteContext(context);
     }
 
-    bool Context::create(const Window& window, int major, int minor)
+    bool Context::create(const Window& window)
     {
         //Delete the context if it has been created before
         if(created)
@@ -20,14 +20,6 @@ namespace pcke
             SDL_GL_DeleteContext(context);
             created = false;
         }
-
-        //Set the context settings
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-        #ifdef PCKE_DEBUG
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
-        #endif //PCKE_DEBUG
 
         //Create the context and check for errors
         context = SDL_GL_CreateContext(window.window);
@@ -39,7 +31,20 @@ namespace pcke
         else
             created = true;
 
-        return created;
+        return created
+    }
+    bool Context::create(const Window& window, int major, int minor)
+    {
+        //Set the context settings
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+        #ifdef PCKE_DEBUG
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
+        #endif //PCKE_DEBUG
+
+        //Create the context
+        return create(window);
     }
     bool Context::setActive(const Window& window, bool active)
     {

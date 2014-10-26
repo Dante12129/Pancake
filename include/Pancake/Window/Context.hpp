@@ -17,7 +17,9 @@ namespace pcke
             Context& operator =(const Context&) = delete;
             Context& operator =(Context&&) = delete;
 
+            bool create(const Window& window);
             bool create(const Window& window, int major, int minor);
+
             bool setActive(const Window& window, bool active);
 
             explicit operator bool() const;
