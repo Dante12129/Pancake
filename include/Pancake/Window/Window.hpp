@@ -21,7 +21,12 @@ namespace pcke
 
             Window(const std::string& title, int width, int height);
             Window(SDL_Window* win);
+            Window(const Window&) = delete;
+            Window(Window&&) = delete;
             ~Window();
+
+            Window& operator =(const Window&) = delete;
+            Window& operator =(Window&&) = delete;
 
             bool pollEvent(SDL_Event& event);
 

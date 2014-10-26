@@ -8,12 +8,12 @@ namespace pcke
         public:
             Pancake();
             Pancake(int major, int minor);
-            Pancake(const Pancake& other) = delete;
+            Pancake(const Pancake&) = delete;
             Pancake(Pancake&&) = delete;
             ~Pancake();
 
-            Pancake& operator=(const Pancake& other) = delete;
-            Pancake& operator=(Pancake&& other) = delete;
+            Pancake& operator =(const Pancake&) = delete;
+            Pancake& operator =(Pancake&&) = delete;
 
             int getMajorVersion();
             int getMinorVersion();
