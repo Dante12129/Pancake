@@ -10,7 +10,12 @@ namespace pcke
     class Context
     {
         public:
+            Context(const Context&) = delete;
+            Context(Context&&) = delete;
             ~Context();
+
+            Context& operator =(const Context&) = delete;
+            Context& operator =(Context&&) = delete;
 
             bool create(const Window& window, int major, int minor);
             bool setActive(const Window& window, bool active);
