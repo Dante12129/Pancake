@@ -31,7 +31,7 @@ namespace pcke
         else
             created = true;
 
-        return created
+        return created;
     }
     bool Context::create(const Window& window, int major, int minor)
     {

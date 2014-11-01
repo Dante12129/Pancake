@@ -33,6 +33,9 @@ namespace pcke
     }
     Window::Window(SDL_Window* win) : window(nullptr)
     {
+        //Stream for errors
+        std::stringstream error;
+
         //Take ownership of the window
         window = win;
 
