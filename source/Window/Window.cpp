@@ -3,7 +3,7 @@
 #include <sstream>
 #include <stdexcept>
 
-#include <SDL_opengl.h>
+#include <SDL2/SDL_opengl.h>
 #include "include/Pancake/Graphics/color.hpp"
 #include "source/OpenGL/GLCheck.hpp"
 

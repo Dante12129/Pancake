@@ -1,7 +1,7 @@
 #ifndef CONTEXT_HPP
 #define CONTEXT_HPP
 
-#include <SDL_video.h>
+#include <SDL2/SDL_video.h>
 
 namespace pcke
 {
