@@ -22,6 +22,8 @@ namespace pcke
 
     struct ContextSettings
     {
+        ContextSettings();
+
         int major, minor;
         Profile profile;
     };

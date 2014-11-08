@@ -31,4 +31,6 @@ namespace pcke
 
         return "";
     }
+
+    ContextSettings::ContextSettings() : major(4), minor(5), profile(Profile::Core) {}
 }
