@@ -47,7 +47,7 @@ namespace pcke
               break;
             case Type::Uniform:
                 return GL_UNIFORM_BUFFER;
-            break;
+              break;
             default:
                 return 0;
               break;

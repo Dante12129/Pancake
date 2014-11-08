@@ -67,7 +67,8 @@ SOURCES += \
     source/OpenGL/Texture.cpp \
     source/OpenGL/GLCheck.cpp \
     source/OpenGL/BufferObject.cpp \
-    source/Window/Context.cpp
+    source/Window/Context.cpp \
+    source/Window/ContextSettings.cpp
 
 HEADERS += \
     include/Pancake/Graphics/Color.hpp \
@@ -85,4 +86,5 @@ HEADERS += \
     include/Pancake/Window.hpp \
     source/OpenGL/GLCheck.hpp \
     include/Pancake/OpenGL/BufferObject.hpp \
-    include/Pancake/Window/Context.hpp
+    include/Pancake/Window/Context.hpp \
+    include/Pancake/Window/ContextSettings.hpp

@@ -6,6 +6,7 @@
 namespace pcke
 {
     class Window;
+    struct ContextSettings;
 
     class Context
     {
