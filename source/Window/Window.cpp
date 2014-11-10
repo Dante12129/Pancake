@@ -9,14 +9,14 @@
 
 namespace pcke
 {
-    Window::Window(const std::string& title, int width, int height) : window(nullptr),
+    Window::Window(const std::string& title, int width, int height, WindowSettings settings) : window(nullptr),
         context(nullptr)
     {
         //Stream for errors
         std::stringstream error;
 
         //Create window
-        window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+        window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, static_cast<int>(settings));
         if(window == nullptr)
         {
             error << "Window creation error: " << SDL_GetError();
@@ -109,5 +109,21 @@ namespace pcke
     Uint32 Window::getId() const
     {
         return SDL_GetWindowID(window);
+    }
+
+
+    WindowSettings operator |(WindowSettings left, WindowSettings right)
+    {
+        return static_cast<WindowSettings>(static_cast<int>(left) | static_cast<int>(right));
+    }
+
+    WindowSettings operator &(WindowSettings left, WindowSettings right)
+    {
+        return static_cast<WindowSettings>(static_cast<int>(left) & static_cast<int>(right));
+    }
+
+    bool any(WindowSettings settings)
+    {
+        return settings != WindowSettings::None;
     }
 }
