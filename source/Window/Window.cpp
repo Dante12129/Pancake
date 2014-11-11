@@ -9,13 +9,13 @@
 
 namespace pcke
 {
-    Window::Window(const std::string& title, int width, int height, WindowSettings settings) : window(nullptr)
+    Window::Window(const std::string& title, int width, int height, WindowSettings wsettings, const ContextSettings& csettings) : window(nullptr)
     {
         //Stream for errors
         std::stringstream error;
 
         //Create window
-        window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, static_cast<int>(settings));
+        window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, static_cast<int>(wsettings));
         if(window == nullptr)
         {
             error << "Window creation error: " << SDL_GetError();
@@ -23,7 +23,7 @@ namespace pcke
         }
 
         //Create GL Context
-        context.create(*this);
+        context.create(*this, csettings);
         if(!context)
         {
             error << "Context creation error: " << SDL_GetError();
