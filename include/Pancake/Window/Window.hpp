@@ -8,6 +8,8 @@
 
 #include <glm/vec2.hpp>
 
+#include <Pancake/Window/Context.hpp>
+
 namespace pcke
 {
     class Color;
@@ -57,7 +59,7 @@ namespace pcke
 
         private:
             SDL_Window* window;
-            SDL_GLContext context;
+            Context context;
             bool key_repeat = false;
     };
 

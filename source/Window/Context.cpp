@@ -6,6 +6,7 @@
 
 namespace pcke
 {
+    Context::Context() : context(nullptr) {}
     Context::~Context()
     {
         if(created)

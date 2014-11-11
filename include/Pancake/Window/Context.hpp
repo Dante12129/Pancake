@@ -13,6 +13,7 @@ namespace pcke
     class Context
     {
         public:
+            Context();
             Context(const Context&) = delete;
             Context(Context&&) = delete;
             ~Context();

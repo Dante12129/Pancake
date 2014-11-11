@@ -9,8 +9,7 @@
 
 namespace pcke
 {
-    Window::Window(const std::string& title, int width, int height, WindowSettings settings) : window(nullptr),
-        context(nullptr)
+    Window::Window(const std::string& title, int width, int height, WindowSettings settings) : window(nullptr)
     {
         //Stream for errors
         std::stringstream error;
@@ -24,8 +23,8 @@ namespace pcke
         }
 
         //Create GL Context
-        context = SDL_GL_CreateContext(window);
-        if(context == nullptr)
+        context.create(*this);
+        if(!context)
         {
             error << "Context creation error: " << SDL_GetError();
             throw std::runtime_error(error.str());
@@ -40,8 +39,8 @@ namespace pcke
         window = win;
 
         //Create GL Context
-        context = SDL_GL_CreateContext(window);
-        if(context == nullptr)
+        context.create(*this);
+        if(!context)
         {
             error << "Context creation error: " << SDL_GetError();
             throw std::runtime_error(error.str());
@@ -49,8 +48,7 @@ namespace pcke
     }
     Window::~Window()
     {
-        //Destroy the context and window
-        SDL_GL_DeleteContext(context);
+        //Destroy the window
         SDL_DestroyWindow(window);
     }
 
@@ -96,7 +94,7 @@ namespace pcke
     }
     void Window::setActive(bool enable)
     {
-        SDL_GL_MakeCurrent(window, context);
+        context.setActive(*this, enable);
     }
 
     glm::uvec2 Window::getPosition() const
