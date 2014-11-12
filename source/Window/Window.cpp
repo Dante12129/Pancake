@@ -1,7 +1,6 @@
 #include "include/Pancake/Window/Window.hpp"
 
-#include <sstream>
-#include <stdexcept>
+#include <iostream>
 
 #include <SDL2/SDL_opengl.h>
 #include "include/Pancake/Graphics/color.hpp"
@@ -11,30 +10,22 @@ namespace pcke
 {
     Window::Window(const std::string& title, int width, int height, WindowSettings wsettings, const ContextSettings& csettings) : window(nullptr)
     {
-        //Stream for errors
-        std::stringstream error;
-
         //Create window
         window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, static_cast<int>(wsettings));
         if(window == nullptr)
         {
-            error << "Window creation error: " << SDL_GetError();
-            throw std::runtime_error(error.str());
+            std::cerr << "Window creation error: " << SDL_GetError();
         }
 
         //Create GL Context
         context.create(*this, csettings);
         if(!context)
         {
-            error << "Context creation error: " << SDL_GetError();
-            throw std::runtime_error(error.str());
+            std::cerr << "Context creation error in window (creating from scratch).";
         }
     }
     Window::Window(SDL_Window* win) : window(nullptr)
     {
-        //Stream for errors
-        std::stringstream error;
-
         //Take ownership of the window
         window = win;
 
@@ -42,8 +33,7 @@ namespace pcke
         context.create(*this);
         if(!context)
         {
-            error << "Context creation error: " << SDL_GetError();
-            throw std::runtime_error(error.str());
+            std::cerr << "Context creation error in window (creating from SDL_Window).";
         }
     }
     Window::~Window()

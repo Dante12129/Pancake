@@ -22,16 +22,32 @@ namespace pcke
             created = false;
         }
 
-        //Set the context settings
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, settings.major);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, settings.minor);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, static_cast<int>(settings.profile));
-        #ifdef PCKE_DEBUG
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
-        #endif //PCKE_DEBUG
+        //Set context options, trying the highest version
+        for(int major = settings.major; major > 0; --major)
+        {
+            for(int minor = settings.minor; minor > 0; --minor)
+            {
+                //Set the context settings
+                SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
+                SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
+                SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+                #ifdef PCKE_DEBUG
+                SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
+                #endif //PCKE_DEBUG
 
-        //Create the context and check for errors
-        context = SDL_GL_CreateContext(window.window);
+                //Create the context with the current flags
+                context = SDL_GL_CreateContext(window.window);
+
+                //See if the minor version is supported
+                if(context)
+                    break;
+            }
+            //See if the major version is supported
+            if(context)
+                break;
+        }
+
+        //If a context hasn't been created by now, then there's a problem
         if(!context)
         {
             std::cerr << "Error creating a context: " << SDL_GetError() << std::endl;
@@ -60,6 +76,6 @@ namespace pcke
 
     Context::operator bool() const
     {
-        return context;
+        return created;
     }
 }
