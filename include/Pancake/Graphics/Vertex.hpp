@@ -1,6 +1,7 @@
 #ifndef VERTEX_HPP
 #define VERTEX_HPP
 
+#include <glm/vec2.hpp>
 #include <glm/vec4.hpp>
 
 #include <Pancake/Graphics/Color.hpp>
@@ -11,6 +12,7 @@ namespace pcke
     {
         public:
             glm::vec4 pos;
+            glm::vec2 tex;
             Color color;
     };
 }
