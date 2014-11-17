@@ -32,6 +32,7 @@ namespace pcke
             glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0));
             glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0));
             glCheck(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, img.getPixels()));
+            glCheck(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));
 
             unbind();
             created = true;
