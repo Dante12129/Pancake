@@ -10,7 +10,7 @@ namespace pcke
     bool Image::loadFromFile(const std::string& file)
     {
         int width, height, channels;
-        unsigned char* image_data = stbi_load(file.c_str(), &width, &height, &channels, 4);
+        unsigned char* image_data = stbi_load(file.c_str(), &width, &height, &channels, STBI_rgb_alpha);
 
         if(image_data && width && height)
         {
