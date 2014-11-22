@@ -89,4 +89,5 @@ HEADERS += \
     include/Pancake/OpenGL/BufferObject.hpp \
     include/Pancake/Window/Context.hpp \
     include/Pancake/Window/ContextSettings.hpp \
-    include/Pancake/System/Clipboard.hpp
+    include/Pancake/System/Clipboard.hpp \
+    include/Pancake/System.hpp
