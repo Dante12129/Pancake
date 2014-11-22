@@ -68,7 +68,8 @@ SOURCES += \
     source/OpenGL/GLCheck.cpp \
     source/OpenGL/BufferObject.cpp \
     source/Window/Context.cpp \
-    source/Window/ContextSettings.cpp
+    source/Window/ContextSettings.cpp \
+    source/System/Clipboard.cpp
 
 HEADERS += \
     include/Pancake/Graphics/Color.hpp \
@@ -87,4 +88,5 @@ HEADERS += \
     source/OpenGL/GLCheck.hpp \
     include/Pancake/OpenGL/BufferObject.hpp \
     include/Pancake/Window/Context.hpp \
-    include/Pancake/Window/ContextSettings.hpp
+    include/Pancake/Window/ContextSettings.hpp \
+    include/Pancake/System/Clipboard.hpp
