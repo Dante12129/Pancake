@@ -69,7 +69,8 @@ SOURCES += \
     source/OpenGL/BufferObject.cpp \
     source/Window/Context.cpp \
     source/Window/ContextSettings.cpp \
-    source/System/Clipboard.cpp
+    source/System/Clipboard.cpp \
+    source/System/Info.cpp
 
 HEADERS += \
     include/Pancake/Graphics/Color.hpp \
@@ -90,4 +91,5 @@ HEADERS += \
     include/Pancake/Window/Context.hpp \
     include/Pancake/Window/ContextSettings.hpp \
     include/Pancake/System/Clipboard.hpp \
-    include/Pancake/System.hpp
+    include/Pancake/System.hpp \
+    include/Pancake/System/Info.hpp
