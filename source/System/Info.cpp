@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL_cpuinfo.h>
 #include <SDL2/SDL_platform.h>
+#include <SDL2/SDL_video.h>
 
 namespace pcke
 {
@@ -22,4 +23,9 @@ namespace pcke
     {
         return SDL_GetSystemRAM();
     }
+
+    std::string GPU::getCurrentDriver()
+    {
+        return SDL_GetCurrentVideoDriver();
+     }
 }

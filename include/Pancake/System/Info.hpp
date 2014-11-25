@@ -14,6 +14,12 @@ namespace pcke
             static int getThreads();
             static int getRAM();
     };
+
+    class GPU
+    {
+        public:
+            static std::string getCurrentDriver();
+    };
 }
 
 #endif // INFO_HPP
