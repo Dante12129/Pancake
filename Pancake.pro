@@ -17,15 +17,6 @@ win32{
     DEFINES += PANCAKE_WINDOWS
     PLATFORM = Windows
 
-    CONFIG(debug, debug|release){
-        DESTDIR = C:/Users/Dan/Documents/Programs/Pancake/build/$${PLATFORM}/Debug
-        OBJECTS_DIR = C:/Users/Dan/Documents/Programs/Pancake/build/$${PLATFORM}/Debug
-    }
-    CONFIG(release, debug|release){
-        DESTDIR = C:/Users/Dan/Documents/Programs/Pancake/build/$${PLATFORM}/Release
-        OBJECTS_DIR = C:/Users/Dan/Documents/Programs/Pancake/build/$${PLATFORM}/Release
-    }
-
     LIBS += -LC:/Users/Dan/Documents/Programs/Libraries/lib
     INCLUDEPATH += include C:/Users/Dan/Documents/Programs/Libraries/include
     DEPENDPATH += include C:/Users/Dan/Document/Programs/Libraries/include
@@ -35,25 +26,16 @@ unix:!macx{
     DEFINES += PANCAKE_UNIX
     PLATFORM = Unix
 
-    CONFIG(debug, debug|release){
-        DESTDIR = /media/sf_Programs/Pancake/build/$${PLATFORM}/Debug
-        OBJECTS_DIR = /media/sf_Programs/Pancake/build/$${PLATFORM}/Debug
-    }
-    CONFIG(release, debug|release){
-        DESTDIR = /media/sf_Programs/Pancake/build/%{PLATFORM}/Release
-        OBJECTS_DIR = /media/sf_Programs/Pancake/build/$${PLATFORM}/Release
-    }
-
     LIBS += -Lusr/local/lib
     INCLUDEPATH += include usr/local/include
     DEPENDPATH += include usr/local/include
 }
 
-CONFIG(debug, debug|release): LIBS += -Wl,--whole-archive -lglutilD -lglloadD -Wl,--no-whole-archive -lSDL2-d
-CONFIG(release, debug|release): LIBS += -Wl,--whole-archive -lglutil -lglload -Wl,--no-whole-archive -lSDL2
+CONFIG(debug, debug|release): LIBS += -Wl,--whole-archive -lglutilD -lglloadD -Wl,--no-whole-archive
+CONFIG(release, debug|release): LIBS += -Wl,--whole-archive -lglutil -lglload -Wl,--no-whole-archive
 
 
-win32:LIBS += -lopengl32
+win32:LIBS += -lSDL2 -lopengl32
 unix:!macx:LIBS += -lGL
 
 SOURCES += \

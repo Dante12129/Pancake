@@ -21,7 +21,6 @@ namespace pcke
         Image image;
         return image.loadFromFile(file) && loadFromImage(image);
     }
-
     bool Texture::loadFromImage(const Image& img)
     {
         if(img.getSize().x > 0 && img.getSize().y > 0)
@@ -44,6 +43,11 @@ namespace pcke
         }
 
         return created;
+    }
+    bool Texture::loadFromSurface(SDL_Surface* surface)
+    {
+        Image image;
+        return image.loadFromSurface(surface) && loadFromImage(image);
     }
 
     void Texture::bind() const

@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <SDL2/SDL_surface.h>
+
 #include <glload/gl_3_3.h>
 #include <glm/vec2.hpp>
 
@@ -21,6 +23,7 @@ namespace pcke
 
             bool loadFromFile(const std::string& file);
             bool loadFromImage(const Image& img);
+            bool loadFromSurface(SDL_Surface* surface);
 
             void bind() const;
             void unbind() const;

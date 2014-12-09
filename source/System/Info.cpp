@@ -27,5 +27,5 @@ namespace pcke
     std::string GPU::getCurrentDriver()
     {
         return SDL_GetCurrentVideoDriver();
-     }
+    }
 }
