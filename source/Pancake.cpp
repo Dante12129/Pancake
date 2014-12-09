@@ -4,6 +4,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_video.h>
+#include <SDL2/SDL_ttf.h>
 
 #include <glload/gl_load.h>
 
@@ -16,7 +17,13 @@ namespace pcke
     {
         //Initialize SDL
         if(SDL_Init(SDL_INIT_VIDEO))
-            std::cerr << "SDL couldn't be initialized." << std::endl;
+            std::cerr << "SDL couldn't be initialized: " << SDL_GetError() << std::endl;
+
+        //Initialize SDL_ttf
+        if(TTF_Init())
+        {
+            std::cerr << "SDL_ttf couldn't be initialized: " << TTF_GetError() << std::endl;
+        }
 
         //Create dummy window and context for OpenGL
         Window dummy_window("", 0, 0, WindowSettings::OpenGL | WindowSettings::Hidden);
@@ -30,7 +37,7 @@ namespace pcke
         //Check the OpenGL version
         if(!ogl_IsVersionGEQ(3, 3))
         {
-            std::cerr << "OpenGL is not at least version 3.3" << std::endl;
+            std::cerr << "OpenGL is not at least version 3.3; some functionality may not work." << std::endl;
         }
     }
     Pancake::Pancake(int major, int minor)
@@ -70,8 +77,9 @@ namespace pcke
 
     Pancake::~Pancake()
     {
-        //Shutdown SDL
+        //Shutdown SDL and its extensions
         SDL_Quit();
+        TTF_Quit();
     }
 
     int Pancake::getMajorVersion()

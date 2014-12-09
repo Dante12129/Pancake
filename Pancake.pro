@@ -35,7 +35,7 @@ CONFIG(debug, debug|release): LIBS += -Wl,--whole-archive -lglutilD -lglloadD -W
 CONFIG(release, debug|release): LIBS += -Wl,--whole-archive -lglutil -lglload -Wl,--no-whole-archive
 
 
-win32:LIBS += -lSDL2 -lopengl32
+win32:LIBS += -lSDL2 -lSDL2_ttf -lopengl32
 unix:!macx:LIBS += -lGL
 
 SOURCES += \
