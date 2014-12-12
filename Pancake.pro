@@ -11,7 +11,7 @@ CONFIG(debug, debug|release): TARGET = pancake-d
 CONFIG(debug, debug|release): DEFINES += PCKE_DEBUG
 TEMPLATE = lib
 
-QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -pedantic -Wno-unused-local-typedefs -Wno-unused-parameter -Wno-unused-variable
+QMAKE_CXXFLAGS += -std=c++1y -Wall -Wextra -pedantic -Wno-unused-local-typedefs -Wno-unused-parameter -Wno-unused-variable
 
 win32{
     DEFINES += PANCAKE_WINDOWS
