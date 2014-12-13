@@ -20,12 +20,6 @@ namespace pcke
             ShaderProgram();
             ~ShaderProgram();
 
-            //Extension-querying functions
-            bool binarySupported() const;
-            bool interfaceSupported() const;
-            bool separationSupported() const;
-            bool glsl420Supported() const;
-
             //Shader functions
             void addShader(Shader& shader);
             void removeShader(Shader& shader);

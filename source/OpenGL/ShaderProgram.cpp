@@ -6,6 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glload/gl_load.h>
 
+#include "include/Pancake/OpenGL/Extensions.hpp"
 #include "include/Pancake/OpenGL/Shader.hpp"
 #include "include/Pancake/OpenGL/Texture.hpp"
 #include "source/OpenGL/GLCheck.hpp"
@@ -17,23 +18,6 @@ namespace pcke
     ShaderProgram::~ShaderProgram()
     {
         glCheck(glDeleteProgram(program));
-    }
-
-    bool ShaderProgram::binarySupported() const
-    {
-        return ogl_IsVersionGEQ(4, 1) || glext_ARB_get_program_binary;
-    }
-    bool ShaderProgram::interfaceSupported() const
-    {
-        return ogl_IsVersionGEQ(4, 3) || glext_ARB_program_interface_query;
-    }
-    bool ShaderProgram::separationSupported() const
-    {
-        return ogl_IsVersionGEQ(4, 1) || glext_ARB_separate_shader_objects;
-    }
-    bool ShaderProgram::glsl420Supported() const
-    {
-        return ogl_IsVersionGEQ(4, 2) || glext_ARB_shading_language_420pack;
     }
 
     void ShaderProgram::addShader(Shader& shader)
@@ -49,7 +33,7 @@ namespace pcke
     {
         uniform_locations.clear();
 
-        if(binarySupported())
+        if(ext::programBinary())
             setValue(GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE);
         glCheck(glLinkProgram(program));
 
@@ -87,7 +71,7 @@ namespace pcke
             Texture::setActiveUnit(i.first);
             i.second.second->bind();
 
-            if(!separationSupported()) //If we can't do uniforms without binding
+            if(!ext::separateShaderObjects()) //If we can't do uniforms without binding
             {
                 //Get the currently-bound program and bind this program
                 auto previous = getBound();
@@ -125,7 +109,7 @@ namespace pcke
 
     void ShaderProgram::setUniform(const std::string& name, float value)
     {
-        if(!separationSupported()) //If we can't do uniforms without binding
+        if(!ext::separateShaderObjects()) //If we can't do uniforms without binding
         {
             //Get the currently-bound program and bind this program
             auto previous = getBound();
@@ -145,7 +129,7 @@ namespace pcke
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second)
     {
-        if(!separationSupported()) //If we can't do uniforms without binding
+        if(!ext::separateShaderObjects()) //If we can't do uniforms without binding
         {
             //Get the currently-bound program and bind this program
             auto previous = getBound();
@@ -165,7 +149,7 @@ namespace pcke
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second, float third)
     {
-        if(!separationSupported()) //If we can't do uniforms without binding
+        if(!ext::separateShaderObjects()) //If we can't do uniforms without binding
         {
             //Get the currently-bound program and bind this program
             auto previous = getBound();
@@ -185,7 +169,7 @@ namespace pcke
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second, float third, float fourth)
     {
-        if(!separationSupported()) //If we can't do uniforms without binding
+        if(!ext::separateShaderObjects()) //If we can't do uniforms without binding
         {
             //Get the currently-bound program and bind this program
             auto previous = getBound();
@@ -205,7 +189,7 @@ namespace pcke
     }
     void ShaderProgram::setUniform(const std::string& name, const glm::mat4& matrix)
     {
-        if(!separationSupported()) //If we can't do uniforms without binding
+        if(!ext::separateShaderObjects()) //If we can't do uniforms without binding
         {
             //Get the currently-bound program and bind this program
             auto previous = getBound();
@@ -242,14 +226,14 @@ namespace pcke
 
     int ShaderProgram::getBinarySize() const
     {
-        if(binarySupported())
+        if(ext::programBinary())
             return getValue(GL_PROGRAM_BINARY_LENGTH);
         else
             return 0;
     }
     std::pair<GLenum, std::unique_ptr<char[]>> ShaderProgram::getBinary() const
     {
-        if(binarySupported())
+        if(ext::programBinary())
         {
             GLenum format = 0;
             std::unique_ptr<char[]> binary(new char[getBinarySize()]);
@@ -263,7 +247,7 @@ namespace pcke
     }
     void ShaderProgram::setBinary(GLenum format, const void* binary, GLsizei length)
     {
-        if(binarySupported())
+        if(ext::programBinary())
             glCheck(glProgramBinary(program, format, binary, length));
     }
 
