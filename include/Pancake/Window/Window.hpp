@@ -46,6 +46,9 @@ namespace pcke
             Window& operator =(const Window&) = delete;
             Window& operator =(Window&&) = delete;
 
+            bool create(const std::string& title, int width, int height, WindowSettings wsettings = WindowSettings::Default, const ContextSettings& csettings = ContextSettings());
+            bool create(SDL_Window* win);
+
             bool pollEvent(SDL_Event& event);
 
             void clear(const Color& color);
