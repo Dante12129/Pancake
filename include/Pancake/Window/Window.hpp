@@ -48,6 +48,7 @@ namespace pcke
 
             bool create(const std::string& title, int width, int height, WindowSettings wsettings = WindowSettings::Default, const ContextSettings& csettings = ContextSettings());
             bool create(SDL_Window* win);
+            void close();
 
             bool pollEvent(SDL_Event& event);
 
@@ -64,6 +65,7 @@ namespace pcke
         private:
             SDL_Window* window = nullptr;
             Context context;
+
             bool key_repeat = false;
     };
 

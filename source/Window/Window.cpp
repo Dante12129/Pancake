@@ -8,13 +8,31 @@
 
 namespace pcke
 {
-    Window::Window(const std::string& title, int width, int height, WindowSettings wsettings, const ContextSettings& csettings) : window(nullptr)
+    Window::Window(const std::string& title, int width, int height, WindowSettings wsettings, const ContextSettings& csettings) : Window()
     {
+        create(title, width, height, wsettings, csettings);
+    }
+    Window::Window(SDL_Window* win) : Window()
+    {
+        create(win);
+    }
+    Window::~Window()
+    {
+        //Destroy the window
+        close();
+    }
+
+    bool Window::create(const std::string& title, int width, int height, WindowSettings wsettings, const ContextSettings& csettings)
+    {
+        //Destroy the current window owned by this object if one exists
+        close();
+
         //Create window
         window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, static_cast<int>(wsettings));
         if(window == nullptr)
         {
             std::cerr << "Window creation error: " << SDL_GetError();
+            return false;
         }
 
         //Create GL Context
@@ -22,10 +40,16 @@ namespace pcke
         if(!context)
         {
             std::cerr << "Context creation error in window (creating from scratch).";
+            return false;
         }
+
+        return true;
     }
-    Window::Window(SDL_Window* win) : window(nullptr)
+    bool Window::create(SDL_Window* win)
     {
+        //Destroy the current window owned by this object if one exists
+        close();
+
         //Take ownership of the window
         window = win;
 
@@ -34,12 +58,18 @@ namespace pcke
         if(!context)
         {
             std::cerr << "Context creation error in window (creating from SDL_Window).";
+            return false;
         }
+
+        return true;
     }
-    Window::~Window()
+    void Window::close()
     {
-        //Destroy the window
-        SDL_DestroyWindow(window);
+        if(window)
+        {
+            SDL_DestroyWindow(window);
+            window = nullptr;
+        }
     }
 
     bool Window::pollEvent(SDL_Event& event)
