@@ -36,6 +36,7 @@ namespace pcke
             friend class Context;
 
         public:
+            Window() = default;
             Window(const std::string& title, int width, int height, WindowSettings wsettings = WindowSettings::Default, const ContextSettings& csettings = ContextSettings());
             Window(SDL_Window* win);
             Window(const Window&) = delete;
@@ -58,7 +59,7 @@ namespace pcke
             Uint32 getId() const;
 
         private:
-            SDL_Window* window;
+            SDL_Window* window = nullptr;
             Context context;
             bool key_repeat = false;
     };
