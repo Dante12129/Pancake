@@ -17,7 +17,9 @@ namespace pcke
     {
         //Initialize SDL
         if(SDL_Init(SDL_INIT_VIDEO))
+        {
             std::cerr << "SDL couldn't be initialized: " << SDL_GetError() << std::endl;
+        }
 
         //Initialize SDL_ttf
         if(TTF_Init())
