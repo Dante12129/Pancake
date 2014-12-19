@@ -2,7 +2,10 @@
 
 #include <iostream>
 
-#include <SDL2/SDL_opengl.h>
+#include <SDL2/SDL_syswm.h>
+
+#include <glload/gl_3_3.h>
+
 #include "include/Pancake/Graphics/color.hpp"
 #include "source/OpenGL/GLCheck.hpp"
 
@@ -127,6 +130,20 @@ namespace pcke
     Uint32 Window::getId() const
     {
         return SDL_GetWindowID(window);
+    }
+    Window::Handle Window::getNativeHandle() const
+    {
+        SDL_SysWMinfo info;
+        SDL_GetWindowWMInfo(window, &info);
+
+        Handle handle;
+        #if defined(PANCAKE_WINDOWS)
+        handle = info.info.win.window;
+        #elif defined (PANCAKE_UNIX)
+        handle = info.info.x11.window;
+        #endif
+
+        return handle;
     }
 
 

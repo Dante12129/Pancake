@@ -10,6 +10,10 @@
 
 #include <Pancake/Window/Context.hpp>
 
+#ifdef PANCAKE_WINDOWS
+#include <windows.h>
+#endif
+
 namespace pcke
 {
     class Color;
@@ -34,6 +38,12 @@ namespace pcke
     {
         public:
             friend class Context;
+
+        #if defined(PANCAKE_WINDOWS)
+            using Handle = HWND;
+        #elif defined(PANCAKE_UNIX)
+            using Handle = unsigned long;
+        #endif
 
         public:
             Window() = default;
@@ -61,6 +71,7 @@ namespace pcke
 
             glm::uvec2 getPosition() const;
             Uint32 getId() const;
+            Handle getNativeHandle() const;
 
         private:
             SDL_Window* window = nullptr;
