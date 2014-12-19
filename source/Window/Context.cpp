@@ -9,18 +9,13 @@ namespace pcke
     Context::Context() : context(nullptr) {}
     Context::~Context()
     {
-        if(created)
-            SDL_GL_DeleteContext(context);
+        free();
     }
 
     bool Context::create(const Window& window, const ContextSettings& settings)
     {
         //Delete the context if it has been created before
-        if(created)
-        {
-            SDL_GL_DeleteContext(context);
-            created = false;
-        }
+        free();
 
         //Set context options, trying the highest version
         for(int major = settings.major; major > 0; --major)
@@ -59,6 +54,15 @@ namespace pcke
         //Return whether creation failed or not
         return created;
     }
+    void Context::free()
+    {
+        if(created)
+        {
+            SDL_GL_DeleteContext(context);
+            created = false;
+        }
+    }
+
     bool Context::setActive(const Window& window, bool active)
     {
         bool result;

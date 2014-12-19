@@ -22,6 +22,7 @@ namespace pcke
             Context& operator =(Context&&) = delete;
 
             bool create(const Window& window, const ContextSettings& settings = ContextSettings());
+            void free();
 
             bool setActive(const Window& window, bool active);
 
