@@ -54,7 +54,8 @@ SOURCES += \
     source/System/Clipboard.cpp \
     source/System/Info.cpp \
     source/OpenGL/Extensions.cpp \
-    source/Window/Display.cpp
+    source/Window/Display.cpp \
+    source/System/Library.cpp
 
 HEADERS += \
     include/Pancake/Graphics/Color.hpp \
@@ -78,4 +79,5 @@ HEADERS += \
     include/Pancake/System.hpp \
     include/Pancake/System/Info.hpp \
     include/Pancake/OpenGL/Extensions.hpp \
-    include/Pancake/Window/Display.hpp
+    include/Pancake/Window/Display.hpp \
+    include/Pancake/System/Library.hpp
