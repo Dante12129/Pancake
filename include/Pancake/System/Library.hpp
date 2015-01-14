@@ -10,7 +10,9 @@ namespace pcke
         public:
             ~Library();
 
-            void* getSymbol(const std::string& name);
+            bool load();
+
+            void* getSymbol(const std::string& name) const;
 
         private:
             void* lib = nullptr;

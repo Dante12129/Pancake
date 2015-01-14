@@ -11,10 +11,11 @@ namespace pcke
         if(lib)
         {
             SDL_UnloadObject(lib);
+            lib = nullptr;
         }
     }
 
-    void* Library::getSymbol(const std::string& name)
+    void* Library::getSymbol(const std::string& name) const
     {
         auto func = SDL_LoadFunction(lib, name.c_str());
         if(!func)
