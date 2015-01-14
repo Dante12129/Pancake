@@ -8,14 +8,17 @@ namespace pcke
     class Library
     {
         public:
+            Library() = default;
+            Library(const std::string& name);
             ~Library();
 
-            bool load();
+            bool load(const std::string& name);
 
             void* getSymbol(const std::string& name) const;
 
         private:
             void* lib = nullptr;
+            bool loaded = false;
     };
 }
 
