@@ -94,7 +94,7 @@ namespace pcke
         return ogl_GetMinorVersion();
     }
 
-    bool pollEvents(SDL_Event& event)
+    bool Pancake::pollEvents(SDL_Event& event)
     {
         return SDL_PollEvent(&event);
     }
