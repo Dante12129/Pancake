@@ -11,7 +11,7 @@
 #include <Pancake/Window/Context.hpp>
 
 #ifdef PANCAKE_WINDOWS
-#include <windows.h>
+struct HWND__;
 #endif
 
 namespace pcke
@@ -40,7 +40,7 @@ namespace pcke
             friend class Context;
 
         #if defined(PANCAKE_WINDOWS)
-            using Handle = HWND;
+            using Handle = HWND__*;
         #elif defined(PANCAKE_UNIX)
             using Handle = unsigned long;
         #endif
