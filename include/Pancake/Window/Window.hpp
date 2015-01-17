@@ -73,8 +73,8 @@ namespace pcke
             Handle getNativeHandle() const;
 
         private:
-            SDL_Window* window = nullptr;
-            Context context;
+            SDL_Window* window_ = nullptr;
+            Context context_;
     };
 
     WindowSettings operator |(WindowSettings left, WindowSettings right);

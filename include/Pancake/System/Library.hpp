@@ -17,8 +17,8 @@ namespace pcke
             void* getSymbol(const std::string& name) const;
 
         private:
-            void* lib = nullptr;
-            bool loaded = false;
+            void* lib_ = nullptr;
+            bool loaded_ = false;
     };
 }
 

@@ -15,7 +15,7 @@ namespace pcke
             int getIndex() const;
 
         private:
-            int index = 0;
+            int index_ = 0;
     };
 }
 

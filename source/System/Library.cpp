@@ -13,10 +13,10 @@ namespace pcke
 
     Library::~Library()
     {
-        if(lib)
+        if(lib_)
         {
-            SDL_UnloadObject(lib);
-            lib = nullptr;
+            SDL_UnloadObject(lib_);
+            lib_ = nullptr;
         }
     }
 
@@ -31,18 +31,18 @@ namespace pcke
         #endif
 
         //Try to load the library with the correct suffix
-        lib = SDL_LoadObject(full_name.c_str());
-        if(!lib)
+        lib_ = SDL_LoadObject(full_name.c_str());
+        if(!lib_)
         {
             std::cerr << "Error loading a library: " << SDL_GetError() << std::endl;
         }
 
-        return loaded;
+        return loaded_;
     }
 
     void* Library::getSymbol(const std::string& name) const
     {
-        auto func = SDL_LoadFunction(lib, name.c_str());
+        auto func = SDL_LoadFunction(lib_, name.c_str());
         if(!func)
         {
             std::cerr << "Error getting a function from library: " << SDL_GetError() << std::endl;

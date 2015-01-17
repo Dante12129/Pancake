@@ -14,22 +14,22 @@ namespace pcke
 
         if(image_data && width && height)
         {
-            size.x = width;
-            size.y = height;
+            size_.x = width;
+            size_.y = height;
 
-            data.resize(width * height * 4);
-            memcpy(&data[0], image_data, data.size());
+            data_.resize(width * height * 4);
+            memcpy(&data_[0], image_data, data_.size());
 
-            created = true;
+            created_ = true;
         }
         else
         {
-            created = false;
+            created_ = false;
             std::cerr << "Error loading image from file: " << stbi_failure_reason() << std::endl;
         }
 
         stbi_image_free(image_data);
-        return created;
+        return created_;
     }
     bool Image::loadFromSurface(SDL_Surface* surface)
     {
@@ -45,16 +45,16 @@ namespace pcke
 
         if(new_surface->w > 0 &&  new_surface->h > 0)
         {
-            size = {new_surface->w, new_surface->h};
+            size_ = {new_surface->w, new_surface->h};
 
-            data.resize(size.x * size.y * 4);
-            memcpy(&data[0], new_surface->pixels, data.size());
+            data_.resize(size_.x * size_.y * 4);
+            memcpy(&data_[0], new_surface->pixels, data_.size());
 
-            created = true;
+            created_ = true;
         }
         else
         {
-            created = false;
+            created_ = false;
             std::cerr << "Error loading image from surface: dimension of 0" << std::endl;
         }
 
@@ -62,15 +62,15 @@ namespace pcke
         if(SDL_MUSTLOCK(new_surface))
             SDL_UnlockSurface(new_surface);
 
-        return created;
+        return created_;
     }
 
     glm::uvec2 Image::getSize() const
     {
-        return size;
+        return size_;
     }
     const std::uint8_t* Image::getPixels() const
     {
-        return &data.front();
+        return &data_.front();
     }
 }

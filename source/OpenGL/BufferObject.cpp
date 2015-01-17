@@ -4,35 +4,35 @@
 
 namespace pcke
 {
-    BufferObject::BufferObject(Type type) : type(toGL(type))
+    BufferObject::BufferObject(Type type) : type_(toGL(type))
     {
-        glCheck(glGenBuffers(1, &buffer));
+        glCheck(glGenBuffers(1, &buffer_));
     }
     BufferObject::~BufferObject()
     {
-        glCheck(glDeleteBuffers(1, &buffer));
+        glCheck(glDeleteBuffers(1, &buffer_));
     }
 
     void BufferObject::setData(GLsizeiptr size, void* data, GLenum usage)
     {
         bind();
-        glCheck(glBufferData(type, size, data, usage));
+        glCheck(glBufferData(type_, size, data, usage));
         unbind();
     }
     void BufferObject::updateData(GLintptr offset, GLsizeiptr size, void* data)
     {
         bind();
-        glCheck(glBufferSubData(type, offset, size, data));
+        glCheck(glBufferSubData(type_, offset, size, data));
         unbind();
     }
 
     void BufferObject::bind() const
     {
-        glCheck(glBindBuffer(type, buffer));
+        glCheck(glBindBuffer(type_, buffer_));
     }
     void BufferObject::unbind() const
     {
-        glCheck(glBindBuffer(type, 0));
+        glCheck(glBindBuffer(type_, 0));
     }
 
     GLenum BufferObject::toGL(Type type)

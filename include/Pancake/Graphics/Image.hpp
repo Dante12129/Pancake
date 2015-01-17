@@ -21,10 +21,10 @@ namespace pcke
             const std::uint8_t* getPixels() const;
 
         private:
-            bool created = false;
-            std::vector<std::uint8_t> data;
+            bool created_ = false;
+            std::vector<std::uint8_t> data_;
 
-            glm::uvec2 size;
+            glm::uvec2 size_;
     };
 }
 

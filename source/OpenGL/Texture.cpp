@@ -34,15 +34,15 @@ namespace pcke
             glCheck(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));
 
             unbind();
-            created = true;
+            created_ = true;
         }
         else
         {
-            created = false;
+            created_ = false;
             std::cerr << "Error loading texure from image: dimension of 0" << std::endl;
         }
 
-        return created;
+        return created_;
     }
     bool Texture::loadFromSurface(SDL_Surface* surface)
     {

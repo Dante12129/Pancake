@@ -6,7 +6,7 @@
 
 namespace pcke
 {
-    Context::Context() : context(nullptr) {}
+    Context::Context() : context_(nullptr) {}
     Context::~Context()
     {
         free();
@@ -31,35 +31,35 @@ namespace pcke
                 #endif //PCKE_DEBUG
 
                 //Create the context with the current flags
-                context = SDL_GL_CreateContext(window.window);
+                context_ = SDL_GL_CreateContext(window.window_);
 
                 //See if the minor version is supported
-                if(context)
+                if(context_)
                     break;
             }
             //See if the major version is supported
-            if(context)
+            if(context_)
                 break;
         }
 
         //If a context hasn't been created by now, then there's a problem
-        if(!context)
+        if(!context_)
         {
             std::cerr << "Error creating a context: " << SDL_GetError() << std::endl;
-            created = false;
+            created_ = false;
         }
         else
-            created = true;
+            created_ = true;
 
         //Return whether creation failed or not
-        return created;
+        return created_;
     }
     void Context::free()
     {
-        if(created)
+        if(created_)
         {
-            SDL_GL_DeleteContext(context);
-            created = false;
+            SDL_GL_DeleteContext(context_);
+            created_ = false;
         }
     }
 
@@ -68,9 +68,9 @@ namespace pcke
         bool result;
 
         if(active)
-            result = SDL_GL_MakeCurrent(window.window, context);
+            result = SDL_GL_MakeCurrent(window.window_, context_);
         else
-            result = SDL_GL_MakeCurrent(window.window, nullptr);
+            result = SDL_GL_MakeCurrent(window.window_, nullptr);
 
         if(!result)
             std::cerr << "Error setting active context: " << SDL_GetError() << std::endl;
@@ -80,6 +80,6 @@ namespace pcke
 
     Context::operator bool() const
     {
-        return created;
+        return created_;
     }
 }

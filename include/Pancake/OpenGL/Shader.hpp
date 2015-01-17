@@ -28,8 +28,8 @@ namespace pcke
             bool loadFromMemory(const std::string& src, Type type);
 
         private:
-            GLuint shader;
-            bool created = false;
+            GLuint shader_;
+            bool created_ = false;
 
             bool create(const std::string& src, Type type);
     };

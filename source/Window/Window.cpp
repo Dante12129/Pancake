@@ -31,16 +31,16 @@ namespace pcke
         close();
 
         //Create window
-        window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, static_cast<int>(wsettings));
-        if(window == nullptr)
+        window_ = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, static_cast<int>(wsettings));
+        if(window_ == nullptr)
         {
             std::cerr << "Window creation error: " << SDL_GetError();
             return false;
         }
 
         //Create GL Context
-        context.create(*this, csettings);
-        if(!context)
+        context_.create(*this, csettings);
+        if(!context_)
         {
             std::cerr << "Context creation error in window (creating from scratch).";
             return false;
@@ -54,11 +54,11 @@ namespace pcke
         close();
 
         //Take ownership of the window
-        window = win;
+        window_ = win;
 
         //Create GL Context
-        context.create(*this);
-        if(!context)
+        context_.create(*this);
+        if(!context_)
         {
             std::cerr << "Context creation error in window (creating from SDL_Window).";
             return false;
@@ -68,10 +68,10 @@ namespace pcke
     }
     void Window::close()
     {
-        if(window)
+        if(window_)
         {
-            SDL_DestroyWindow(window);
-            window = nullptr;
+            SDL_DestroyWindow(window_);
+            window_ = nullptr;
         }
     }
 
@@ -96,7 +96,7 @@ namespace pcke
     }
     void Window::display()
     {
-        SDL_GL_SwapWindow(window);
+        SDL_GL_SwapWindow(window_);
     }
 
     bool Window::setVerticalSyncEnabled(bool enable)
@@ -109,24 +109,24 @@ namespace pcke
     }
     void Window::setActive(bool enable)
     {
-        context.setActive(*this, enable);
+        context_.setActive(*this, enable);
     }
 
     glm::uvec2 Window::getPosition() const
     {
         int x, y;
-        SDL_GetWindowPosition(window, &x, &y);
+        SDL_GetWindowPosition(window_, &x, &y);
 
         return {x, y};
     }
     Uint32 Window::getId() const
     {
-        return SDL_GetWindowID(window);
+        return SDL_GetWindowID(window_);
     }
     Window::Handle Window::getNativeHandle() const
     {
         SDL_SysWMinfo info;
-        SDL_GetWindowWMInfo(window, &info);
+        SDL_GetWindowWMInfo(window_, &info);
 
         Handle handle;
         #if defined(PANCAKE_WINDOWS)

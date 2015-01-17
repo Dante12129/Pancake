@@ -13,51 +13,51 @@
 
 namespace pcke
 {
-    ShaderProgram::ShaderProgram() : program(glCreateProgram())
+    ShaderProgram::ShaderProgram() : program_(glCreateProgram())
     {}
     ShaderProgram::~ShaderProgram()
     {
-        glCheck(glDeleteProgram(program));
+        glCheck(glDeleteProgram(program_));
     }
 
     void ShaderProgram::addShader(Shader& shader)
     {
-        glCheck(glAttachShader(program, shader.shader));
+        glCheck(glAttachShader(program_, shader.shader_));
     }
     void ShaderProgram::removeShader(Shader& shader)
     {
-        glCheck(glDetachShader(program, shader.shader));
+        glCheck(glDetachShader(program_, shader.shader_));
     }
 
     bool ShaderProgram::link()
     {
-        uniform_locations.clear();
+        uniform_locations_.clear();
 
         if(ext::programBinary())
             setValue(GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE);
-        glCheck(glLinkProgram(program));
+        glCheck(glLinkProgram(program_));
 
         GLint status;
-        glCheck(glGetProgramiv(program, GL_LINK_STATUS, &status));
+        glCheck(glGetProgramiv(program_, GL_LINK_STATUS, &status));
         if (status == GL_FALSE)
         {
             GLint log_length;
-            glCheck(glGetProgramiv(program, GL_INFO_LOG_LENGTH, &log_length));
+            glCheck(glGetProgramiv(program_, GL_INFO_LOG_LENGTH, &log_length));
 
             std::unique_ptr<GLchar[]> log(new GLchar[log_length + 1]);
-            glCheck(glGetProgramInfoLog(program, log_length, 0, log.get()));
+            glCheck(glGetProgramInfoLog(program_, log_length, 0, log.get()));
             std::cerr << "Error linking shader program: " << log.get() << std::endl;
-            linked = false;
+            linked_ = false;
         }
         else
-            linked = true;
+            linked_ = true;
 
-        return linked;
+        return linked_;
     }
 
     void ShaderProgram::bind() const
     {
-        glCheck(glUseProgram(program));
+        glCheck(glUseProgram(program_));
     }
     void ShaderProgram::unbind() const
     {
@@ -65,7 +65,7 @@ namespace pcke
     }
     void ShaderProgram::bindTextures() const
     {
-        for(const auto& i : textures)
+        for(const auto& i : textures_)
         {
             //Activate the appropriate texture unit and texture
             Texture::setActiveUnit(i.first);
@@ -87,7 +87,7 @@ namespace pcke
             else //If we can do uniforms without binding
             {
                 //Set the uniform with this program
-                glCheck(glProgramUniform1i(program, i.second.first, i.first));
+                glCheck(glProgramUniform1i(program_, i.second.first, i.first));
             }
         }
 
@@ -97,7 +97,7 @@ namespace pcke
 
     GLuint ShaderProgram::getHandle() const
     {
-        return program;
+        return program_;
     }
     GLuint ShaderProgram::getBound()
     {
@@ -124,7 +124,7 @@ namespace pcke
         else //If we can do uniforms without binding
         {
             //Set the uniform with this program
-            glCheck(glProgramUniform1f(program, uniformLocation(name), value));
+            glCheck(glProgramUniform1f(program_, uniformLocation(name), value));
         }
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second)
@@ -144,7 +144,7 @@ namespace pcke
         else //If we can do uniforms without binding
         {
             //Set the uniform with this program
-            glCheck(glProgramUniform2f(program, uniformLocation(name), first, second));
+            glCheck(glProgramUniform2f(program_, uniformLocation(name), first, second));
         }
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second, float third)
@@ -164,7 +164,7 @@ namespace pcke
         else //If we can do uniforms without binding
         {
             //Set the uniform with this program
-            glCheck(glProgramUniform3f(program, uniformLocation(name), first, second, third));
+            glCheck(glProgramUniform3f(program_, uniformLocation(name), first, second, third));
         }
     }
     void ShaderProgram::setUniform(const std::string& name, float first, float second, float third, float fourth)
@@ -184,7 +184,7 @@ namespace pcke
         else //If we can do uniforms without binding
         {
             //Set the uniform with this program
-            glCheck(glProgramUniform4f(program, uniformLocation(name), first, second, third, fourth));
+            glCheck(glProgramUniform4f(program_, uniformLocation(name), first, second, third, fourth));
         }
     }
     void ShaderProgram::setUniform(const std::string& name, const glm::mat4& matrix)
@@ -204,15 +204,15 @@ namespace pcke
         else //If we can do uniforms without binding
         {
             //Set the uniform with this program
-            glCheck(glProgramUniformMatrix4fv(program, uniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
+            glCheck(glProgramUniformMatrix4fv(program_, uniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
         }
     }
     void ShaderProgram::setUniform(const std::string& name, const Texture& tex, GLuint unit)
     {
         //Try to find the cached info
-        auto it = textures.find(unit);
+        auto it = textures_.find(unit);
 
-        if(it != textures.end()) //If the unit was found
+        if(it != textures_.end()) //If the unit was found
         {
             //Replace the texture and uniform location
             it->second = std::make_pair(uniformLocation(name), &tex);
@@ -220,7 +220,7 @@ namespace pcke
         else //If the unit was not found
         {
             //Save the texture unit and the texture we want to associate with it
-            textures.insert(std::make_pair(unit, std::make_pair(uniformLocation(name), &tex)));
+            textures_.insert(std::make_pair(unit, std::make_pair(uniformLocation(name), &tex)));
         }
     }
 
@@ -238,7 +238,7 @@ namespace pcke
             GLenum format = 0;
             std::unique_ptr<char[]> binary(new char[getBinarySize()]);
 
-            glCheck(glGetProgramBinary(program, getBinarySize(), nullptr, &format, void_cast(binary)));
+            glCheck(glGetProgramBinary(program_, getBinarySize(), nullptr, &format, void_cast(binary)));
 
             return std::make_pair(format, std::move(binary));
         }
@@ -248,19 +248,19 @@ namespace pcke
     void ShaderProgram::setBinary(GLenum format, const void* binary, GLsizei length)
     {
         if(ext::programBinary())
-            glCheck(glProgramBinary(program, format, binary, length));
+            glCheck(glProgramBinary(program_, format, binary, length));
     }
 
     int ShaderProgram::getValue(GLenum param) const
     {
         int value;
-        glCheck(glGetProgramiv(program, param, &value));
+        glCheck(glGetProgramiv(program_, param, &value));
 
         return value;
     }
     void ShaderProgram::setValue(GLenum param, int value)
     {
-        glCheck(glProgramParameteri(program, param, value));
+        glCheck(glProgramParameteri(program_, param, value));
     }
 
     //Private methods
@@ -269,13 +269,13 @@ namespace pcke
         GLuint location = -2;
 
         //Try to find cached location
-        auto loc_it = uniform_locations.find(name);
+        auto loc_it = uniform_locations_.find(name);
 
         //If the location wasn't found, insert it
-        if(loc_it == uniform_locations.cend())
+        if(loc_it == uniform_locations_.cend())
         {
-            location = glCheck(glGetUniformLocation(program, name.c_str()));
-            uniform_locations.insert(std::make_pair(name, location));
+            location = glCheck(glGetUniformLocation(program_, name.c_str()));
+            uniform_locations_.insert(std::make_pair(name, location));
         }
         else
             location = loc_it->second;

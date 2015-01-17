@@ -29,8 +29,8 @@ namespace pcke
             explicit operator bool() const;
 
         private:
-            SDL_GLContext context;
-            bool created = false;
+            SDL_GLContext context_;
+            bool created_ = false;
     };
 }
 

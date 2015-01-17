@@ -54,15 +54,15 @@ namespace pcke
             void setValue(GLenum param, int value);
 
         private:
-            bool linked = false;
-            GLuint program;
+            bool linked_ = false;
+            GLuint program_;
 
             //Uniform caching
-            std::map<std::string, GLuint> uniform_locations;
+            std::map<std::string, GLuint> uniform_locations_;
             GLuint uniformLocation(const std::string& name);
 
             //Texture caching
-            std::map<GLuint, std::pair<GLuint, const Texture*>> textures;
+            std::map<GLuint, std::pair<GLuint, const Texture*>> textures_;
     };
 
     //Cast unique_ptr to void*

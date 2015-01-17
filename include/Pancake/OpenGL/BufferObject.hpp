@@ -27,8 +27,8 @@ namespace pcke
             void unbind() const;
 
         private:
-            GLuint buffer;
-            GLenum type;
+            GLuint buffer_;
+            GLenum type_;
 
             static GLenum toGL(Type type);
     };

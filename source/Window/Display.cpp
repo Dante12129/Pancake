@@ -4,14 +4,14 @@
 
 namespace pcke
 {
-    Display::Display(int display) : index(display) {}
+    Display::Display(int display) : index_(display) {}
 
     std::string Display::getName() const
     {
-        return SDL_GetDisplayName(index);
+        return SDL_GetDisplayName(index_);
     }
     int Display::getIndex() const
     {
-        return index;
+        return index_;
     }
 }

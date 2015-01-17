@@ -11,9 +11,9 @@ namespace pcke
     class Vertex
     {
         public:
-            glm::vec4 pos;
-            glm::vec2 tex;
-            Color color;
+            glm::vec4 pos_;
+            glm::vec2 tex_;
+            Color color_;
     };
 }
 

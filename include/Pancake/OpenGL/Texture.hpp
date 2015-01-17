@@ -34,7 +34,7 @@ namespace pcke
             static int getMaxSize();
 
         private:
-            bool created = false;
+            bool created_ = false;
             GLuint tex;
 
             glm::uvec2 size;
