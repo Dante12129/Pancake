@@ -60,7 +60,7 @@ namespace pcke
             bool create(SDL_Window* win);
             void close();
 
-            bool processEvent(SDL_Event& event);
+            void processEvent(SDL_Event& event);
 
             void clear(const Color& color);
             void display();

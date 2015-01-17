@@ -75,11 +75,11 @@ namespace pcke
         }
     }
 
-    bool Window::processEvent(SDL_Event& event)
+    void Window::processEvent(SDL_Event& event)
     {
         if(event.type == SDL_WINDOWEVENT)
         {
-            if(event.window.windowID == getID())
+            if(event.window.windowID == getId())
             {
                 if(event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
                 {
