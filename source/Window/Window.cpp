@@ -75,22 +75,18 @@ namespace pcke
         }
     }
 
-    bool Window::pollEvent(SDL_Event& event)
+    bool Window::processEvent(SDL_Event& event)
     {
-        bool result = SDL_PollEvent(&event);
         if(event.type == SDL_WINDOWEVENT)
         {
-            if(event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+            if(event.window.windowID == getID())
             {
-                glCheck(glViewport(0, 0, event.window.data1, event.window.data2));
+                if(event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+                {
+                    glCheck(glViewport(0, 0, event.window.data1, event.window.data2));
+                }
             }
         }
-        if(event.type == SDL_KEYDOWN)
-        {
-            if(!key_repeat && event.key.repeat)
-                return false;
-        }
-        return result;
     }
 
     void Window::clear(const Color& color)
@@ -110,10 +106,6 @@ namespace pcke
         else
             return !SDL_GL_SetSwapInterval(0);
 
-    }
-    void Window::setKeyRepeatEnabled(bool enable)
-    {
-        key_repeat = enable;
     }
     void Window::setActive(bool enable)
     {

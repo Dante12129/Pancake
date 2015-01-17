@@ -11,7 +11,7 @@
 #include <Pancake/Window/Context.hpp>
 
 #ifdef PANCAKE_WINDOWS
-#include <windows.h>
+struct HWND__;
 #endif
 
 namespace pcke
@@ -40,7 +40,7 @@ namespace pcke
             friend class Context;
 
         #if defined(PANCAKE_WINDOWS)
-            using Handle = HWND;
+            using Handle = HWND__*;
         #elif defined(PANCAKE_UNIX)
             using Handle = unsigned long;
         #endif
@@ -60,13 +60,12 @@ namespace pcke
             bool create(SDL_Window* win);
             void close();
 
-            bool pollEvent(SDL_Event& event);
+            bool processEvent(SDL_Event& event);
 
             void clear(const Color& color);
             void display();
 
             bool setVerticalSyncEnabled(bool enable);
-            void setKeyRepeatEnabled(bool enable);
             void setActive(bool enable);
 
             glm::uvec2 getPosition() const;
@@ -76,8 +75,6 @@ namespace pcke
         private:
             SDL_Window* window = nullptr;
             Context context;
-
-            bool key_repeat = false;
     };
 
     WindowSettings operator |(WindowSettings left, WindowSettings right);

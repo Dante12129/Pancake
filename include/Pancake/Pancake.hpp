@@ -1,6 +1,8 @@
 #ifndef DTE_HPP
 #define DTE_HPP
 
+union SDL_Event;
+
 namespace pcke
 {
     class Pancake
@@ -17,6 +19,8 @@ namespace pcke
 
             int getMajorVersion();
             int getMinorVersion();
+
+            bool pollEvents(SDL_Event& event);
     };
 }
 
