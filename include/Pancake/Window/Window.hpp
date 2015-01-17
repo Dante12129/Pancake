@@ -66,7 +66,6 @@ namespace pcke
             void display();
 
             bool setVerticalSyncEnabled(bool enable);
-            void setKeyRepeatEnabled(bool enable);
             void setActive(bool enable);
 
             glm::uvec2 getPosition() const;
@@ -76,8 +75,6 @@ namespace pcke
         private:
             SDL_Window* window = nullptr;
             Context context;
-
-            bool key_repeat = false;
     };
 
     WindowSettings operator |(WindowSettings left, WindowSettings right);

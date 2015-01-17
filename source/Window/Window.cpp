@@ -107,10 +107,6 @@ namespace pcke
             return !SDL_GL_SetSwapInterval(0);
 
     }
-    void Window::setKeyRepeatEnabled(bool enable)
-    {
-        key_repeat = enable;
-    }
     void Window::setActive(bool enable)
     {
         context.setActive(*this, enable);
