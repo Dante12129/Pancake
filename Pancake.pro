@@ -80,4 +80,5 @@ HEADERS += \
     include/Pancake/System/Info.hpp \
     include/Pancake/OpenGL/Extensions.hpp \
     include/Pancake/Window/Display.hpp \
-    include/Pancake/System/Library.hpp
+    include/Pancake/System/Library.hpp \
+    include/Pancake/Config.hpp
