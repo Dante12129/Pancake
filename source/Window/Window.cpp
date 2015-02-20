@@ -131,7 +131,7 @@ namespace pcke
         Handle handle;
         #if defined(PANCAKE_WINDOWS)
         handle = info.info.win.window;
-        #elif defined (PANCAKE_UNIX)
+        #elif defined (PANCAKE_LINUX)
         handle = info.info.x11.window;
         #endif
 

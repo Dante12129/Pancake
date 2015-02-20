@@ -14,18 +14,12 @@ TEMPLATE = lib
 QMAKE_CXXFLAGS += -std=c++1y -Wall -Wextra -pedantic -Wno-unused-local-typedefs -Wno-unused-parameter -Wno-unused-variable
 
 win32{
-    DEFINES += PANCAKE_WINDOWS
-    PLATFORM = Windows
-
     LIBS += -LC:/Users/Dan/Documents/Programs/Libraries/lib
     INCLUDEPATH += include C:/Users/Dan/Documents/Programs/Libraries/include
     DEPENDPATH += include C:/Users/Dan/Document/Programs/Libraries/include
 }
 
 unix:!macx{
-    DEFINES += PANCAKE_UNIX
-    PLATFORM = Unix
-
     LIBS += -Lusr/local/lib
     INCLUDEPATH += include usr/local/include
     DEPENDPATH += include usr/local/include

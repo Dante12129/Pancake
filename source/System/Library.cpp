@@ -26,7 +26,7 @@ namespace pcke
         std::string full_name = name;
         #ifdef PANCAKE_WINDOWS
         full_name += ".dll";
-        #elif defined(PANCAKE_UNIX)
+        #elif defined(PANCAKE_LINUX)
         full_name += ".so";
         #endif
 

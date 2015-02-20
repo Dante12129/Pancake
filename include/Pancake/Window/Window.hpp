@@ -41,7 +41,7 @@ namespace pcke
 
         #if defined(PANCAKE_WINDOWS)
             using Handle = HWND__*;
-        #elif defined(PANCAKE_UNIX)
+        #elif defined(PANCAKE_LINUX)
             using Handle = unsigned long;
         #endif
 
