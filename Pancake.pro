@@ -14,15 +14,15 @@ TEMPLATE = lib
 QMAKE_CXXFLAGS += -std=c++1y -Wall -Wextra -pedantic -Wno-unused-local-typedefs -Wno-unused-parameter -Wno-unused-variable
 
 win32{
-    LIBS += -LC:/Users/Dan/Documents/Programs/Libraries/lib
-    INCLUDEPATH += include C:/Users/Dan/Documents/Programs/Libraries/include
-    DEPENDPATH += include C:/Users/Dan/Document/Programs/Libraries/include
+    LIBS += -L$${LIBS_PATH}
+    INCLUDEPATH += include $$INC_PATH
+    DEPENDPATH += include $$INC_PATH
 }
 
 unix:!macx{
-    LIBS += -Lusr/local/lib
-    INCLUDEPATH += include usr/local/include
-    DEPENDPATH += include usr/local/include
+    LIBS += -L$${LIBS_PATH}
+    INCLUDEPATH += $$INC_PATH
+    DEPENDPATH += include $$INC_PATH
 }
 
 CONFIG(debug, debug|release): LIBS += -Wl,--whole-archive -lglutilD -lglloadD -Wl,--no-whole-archive
