@@ -1,6 +1,8 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
+#include <Pancake/Config.hpp>
+
 #include <string>
 
 #include <SDL2/SDL_events.h>

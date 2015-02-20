@@ -1,5 +1,7 @@
 #include "include/Pancake/System/Library.hpp"
 
+#include <Pancake/Config.hpp>
+
 #include <iostream>
 
 #include <SDL2/SDL_loadso.h>

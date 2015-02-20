@@ -13,7 +13,7 @@
 
     #define PANCAKE_LINUX
 
-#elif
+#else
     #error Operating system not supported
 
 #endif //Platform detection
