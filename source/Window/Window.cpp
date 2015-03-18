@@ -7,7 +7,7 @@
 #include <glload/gl_3_3.h>
 
 #include "include/Pancake/Graphics/color.hpp"
-#include "source/OpenGL/GLCheck.hpp"
+#include "source/Graphics/GLCheck.hpp"
 
 namespace pcke
 {

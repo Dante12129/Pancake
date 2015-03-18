@@ -1,4 +1,4 @@
-#include "include/Pancake/OpenGL/Extensions.hpp"
+#include "include/Pancake/Graphics/Extensions.hpp"
 
 #include <glload/gl_load.h>
 #include <glload/gl_3_3.h>

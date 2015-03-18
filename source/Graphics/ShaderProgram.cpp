@@ -1,4 +1,4 @@
-#include "include/Pancake/OpenGL/ShaderProgram.hpp"
+#include "include/Pancake/Graphics/ShaderProgram.hpp"
 
 #include <iostream>
 #include <memory>
@@ -6,10 +6,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glload/gl_load.h>
 
-#include "include/Pancake/OpenGL/Extensions.hpp"
-#include "include/Pancake/OpenGL/Shader.hpp"
-#include "include/Pancake/OpenGL/Texture.hpp"
-#include "source/OpenGL/GLCheck.hpp"
+#include "include/Pancake/Graphics/Extensions.hpp"
+#include "include/Pancake/Graphics/Shader.hpp"
+#include "include/Pancake/Graphics/Texture.hpp"
+#include "source/Graphics/GLCheck.hpp"
 
 namespace pcke
 {

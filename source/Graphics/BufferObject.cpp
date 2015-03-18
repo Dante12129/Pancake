@@ -1,6 +1,6 @@
-#include "include/Pancake/OpenGL/BufferObject.hpp"
+#include "include/Pancake/Graphics/BufferObject.hpp"
 
-#include "source/OpenGL/GLCheck.hpp"
+#include "source/Graphics/GLCheck.hpp"
 
 namespace pcke
 {

@@ -1,9 +1,9 @@
-#include "include\Pancake\OpenGL\Texture.hpp"
+#include "include\Pancake\Graphics\Texture.hpp"
 
 #include <iostream>
 
 #include "include/Pancake/Graphics/Image.hpp"
-#include "source/OpenGL/GLCheck.hpp"
+#include "source/Graphics/GLCheck.hpp"
 
 namespace pcke
 {

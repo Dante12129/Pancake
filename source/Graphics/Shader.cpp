@@ -1,11 +1,11 @@
-#include "include/Pancake/OpenGL/Shader.hpp"
+#include "include/Pancake/Graphics/Shader.hpp"
 
 #include <fstream>
 #include <iostream>
 #include <memory>
 #include <sstream>
 
-#include "source/OpenGL/GLCheck.hpp"
+#include "source/Graphics/GLCheck.hpp"
 
 namespace pcke
 {
