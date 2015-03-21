@@ -21,7 +21,7 @@ win32{
 
 unix:!macx{
     LIBS += -L$${LIBS_PATH}
-    INCLUDEPATH += $$INC_PATH
+    INCLUDEPATH += include $$INC_PATH
     DEPENDPATH += include $$INC_PATH
 }
 
