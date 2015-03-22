@@ -4,6 +4,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_filesystem.h>
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_ttf.h>
 
@@ -77,7 +78,6 @@ namespace pcke
         SDL_GL_DeleteContext(dummy_context);
         SDL_DestroyWindow(dummy_window);
     }
-
     Pancake::~Pancake()
     {
         //Shutdown SDL and its extensions
@@ -97,5 +97,32 @@ namespace pcke
     bool Pancake::pollEvents(SDL_Event& event)
     {
         return SDL_PollEvent(&event);
+    }
+
+    void Pancake::setApplicationName(const std::string& name)
+    {
+        application_ = name;
+    }
+    void Pancake::setOrganizationName(const std::string& name)
+    {
+        organization_ = name;
+    }
+
+    const std::string& Pancake::getApplicationName() const
+    {
+        return application_;
+    }
+    const std::string& Pancake::getOrganizationName() const
+    {
+        return organization_;
+    }
+
+    std::string Pancake::getBasePath() const
+    {
+        return SDL_GetBasePath();
+    }
+    std::string Pancake::getDataPath() const
+    {
+        return SDL_GetPrefPath(organization_.c_str(), application_.c_str());
     }
 }

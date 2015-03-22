@@ -1,6 +1,8 @@
 #ifndef DTE_HPP
 #define DTE_HPP
 
+#include <string>
+
 union SDL_Event;
 
 namespace pcke
@@ -21,6 +23,18 @@ namespace pcke
             int getMinorVersion();
 
             bool pollEvents(SDL_Event& event);
+
+            void setApplicationName(const std::string& name);
+            void setOrganizationName(const std::string& name);
+
+            const std::string& getApplicationName() const;
+            const std::string& getOrganizationName() const;
+
+            std::string getBasePath() const;
+            std::string getDataPath() const;
+
+        private:
+            std::string application_, organization_;
     };
 }
 
