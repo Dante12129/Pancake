@@ -49,7 +49,8 @@ SOURCES += \
     source/Graphics/GLCheck.cpp \
     source/Graphics/Shader.cpp \
     source/Graphics/ShaderProgram.cpp \
-    source/Graphics/Texture.cpp
+    source/Graphics/Texture.cpp \
+    source/Graphics/Renderer.cpp
 
 HEADERS += \
     include/Pancake/Graphics/Color.hpp \
@@ -77,4 +78,5 @@ HEADERS += \
     include/Pancake/DocMain.hpp \
     source/Graphics/stb/stb_image.h \
     source/Graphics/stb/stb_image_write.h \
-    source/Graphics/GLCheck.hpp
+    source/Graphics/GLCheck.hpp \
+    include/Pancake/Graphics/Renderer.hpp
