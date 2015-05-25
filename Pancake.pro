@@ -28,8 +28,9 @@ unix:!macx{
 CONFIG(debug, debug|release): LIBS += -Wl,--whole-archive -lglutilD -lglloadD -Wl,--no-whole-archive
 CONFIG(release, debug|release): LIBS += -Wl,--whole-archive -lglutil -lglload -Wl,--no-whole-archive
 
+LIBS += -lSDL2 -lSDL2_ttf
 
-win32:LIBS += -lSDL2 -lSDL2_ttf -lopengl32
+win32:LIBS += -lopengl32
 unix:!macx:LIBS += -lGL
 
 SOURCES += \
@@ -50,7 +51,8 @@ SOURCES += \
     source/Graphics/Shader.cpp \
     source/Graphics/ShaderProgram.cpp \
     source/Graphics/Texture.cpp \
-    source/Graphics/Renderer.cpp
+    source/Graphics/Renderer.cpp \
+    source/Graphics/gl_3_3.c
 
 HEADERS += \
     include/Pancake/Graphics/Color.hpp \
@@ -79,4 +81,6 @@ HEADERS += \
     source/Graphics/stb/stb_image.h \
     source/Graphics/stb/stb_image_write.h \
     source/Graphics/GLCheck.hpp \
-    include/Pancake/Graphics/Renderer.hpp
+    include/Pancake/Graphics/Renderer.hpp \
+    source/Graphics/gl_3_3.h \
+    include/Pancake/Graphics/OpenGL.hpp

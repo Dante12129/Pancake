@@ -1,5 +1,7 @@
 *.c
 *.h
+!gl_3_3.c
+!gl_3_3.h
 
 todo.txt
 Pancake.pro.user
