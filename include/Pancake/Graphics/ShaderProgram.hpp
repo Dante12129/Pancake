@@ -7,7 +7,7 @@
 
 #define GLM_FORCE_RADIANS
 #include <glm/fwd.hpp>
-#include <glload/gl_3_3.h>
+#include <Pancake/Graphics/OpenGL.hpp>
 
 namespace pcke
 {

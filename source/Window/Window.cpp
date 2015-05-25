@@ -4,10 +4,9 @@
 
 #include <SDL2/SDL_syswm.h>
 
-#include <glload/gl_3_3.h>
+#include <Pancake/Graphics/OpenGL.hpp>
 
 #include "include/Pancake/Graphics/color.hpp"
-#include "source/Graphics/GLCheck.hpp"
 
 namespace pcke
 {

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <glload/gl_3_3.h>
+#include "source/Graphics/gl_3_3.h"
 
 namespace pcke
 {
@@ -38,20 +38,6 @@ namespace pcke
                 {
                     error = "GL_INVALID_OPERATION";
                     description = "the specified operation is not allowed in the current state";
-                    break;
-                }
-
-                case GL_STACK_OVERFLOW :
-                {
-                    error = "GL_STACK_OVERFLOW";
-                    description = "this command would cause a stack overflow";
-                    break;
-                }
-
-                case GL_STACK_UNDERFLOW :
-                {
-                    error = "GL_STACK_UNDERFLOW";
-                    description = "this command would cause a stack underflow";
                     break;
                 }
 

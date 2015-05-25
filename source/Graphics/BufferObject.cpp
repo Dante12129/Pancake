@@ -1,7 +1,5 @@
 #include "include/Pancake/Graphics/BufferObject.hpp"
 
-#include "source/Graphics/GLCheck.hpp"
-
 namespace pcke
 {
     BufferObject::BufferObject(Type type) : type_(toGL(type))

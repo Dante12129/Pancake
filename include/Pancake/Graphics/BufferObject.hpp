@@ -1,7 +1,7 @@
 #ifndef BUFFEROBJECT_HPP
 #define BUFFEROBJECT_HPP
 
-#include <glload/gl_3_3.h>
+#include <Pancake/Graphics/OpenGL.hpp>
 
 namespace pcke
 {

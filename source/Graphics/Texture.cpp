@@ -3,7 +3,6 @@
 #include <iostream>
 
 #include "include/Pancake/Graphics/Image.hpp"
-#include "source/Graphics/GLCheck.hpp"
 
 namespace pcke
 {

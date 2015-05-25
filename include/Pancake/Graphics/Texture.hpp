@@ -5,7 +5,7 @@
 
 #include <SDL2/SDL_surface.h>
 
-#include <glload/gl_3_3.h>
+#include <Pancake/Graphics/OpenGL.hpp>
 #include <glm/vec2.hpp>
 
 namespace pcke

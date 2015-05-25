@@ -5,8 +5,6 @@
 #include <memory>
 #include <sstream>
 
-#include "source/Graphics/GLCheck.hpp"
-
 namespace pcke
 {
     Shader::~Shader()

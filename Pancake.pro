@@ -25,9 +25,6 @@ unix:!macx{
     DEPENDPATH += include $$INC_PATH
 }
 
-CONFIG(debug, debug|release): LIBS += -Wl,--whole-archive -lglutilD -lglloadD -Wl,--no-whole-archive
-CONFIG(release, debug|release): LIBS += -Wl,--whole-archive -lglutil -lglload -Wl,--no-whole-archive
-
 LIBS += -lSDL2 -lSDL2_ttf
 
 win32:LIBS += -lopengl32
