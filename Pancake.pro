@@ -77,7 +77,7 @@ HEADERS += \
     include/Pancake/DocMain.hpp \
     source/Graphics/stb/stb_image.h \
     source/Graphics/stb/stb_image_write.h \
-    source/Graphics/GLCheck.hpp \
     include/Pancake/Graphics/Renderer.hpp \
-    source/Graphics/gl_3_3.h \
-    include/Pancake/Graphics/OpenGL.hpp
+    include/Pancake/Graphics/OpenGL.hpp \
+    include/Pancake/Graphics/GL/gl_3_3.h \
+    include/Pancake/Graphics/GL/GLCheck.hpp
