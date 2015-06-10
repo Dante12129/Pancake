@@ -8,7 +8,7 @@
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_ttf.h>
 
-#include <glload/gl_load.h>
+#include <Pancake/Graphics/OpenGL.hpp>
 
 #include "include/Pancake/Window/Context.hpp"
 #include "include/Pancake/Window/Window.hpp"
@@ -39,7 +39,7 @@ namespace pcke
         }
 
         //Check the OpenGL version
-        if(!ogl_IsVersionGEQ(3, 3))
+        if(ogl_IsVersionGEQ(3, 3))
         {
             std::cerr << "OpenGL is not at least version 3.3; some functionality may not work." << std::endl;
         }
